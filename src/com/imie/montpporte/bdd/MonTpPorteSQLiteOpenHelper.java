@@ -1,5 +1,7 @@
 package com.imie.montpporte.bdd;
 
+import com.imie.montpporte.data.CommandeSQLiteAdapter;
+import com.imie.montpporte.data.ProductionSQLiteAdapter;
 import com.imie.montpporte.data.UserSQLiteAdapter;
 import com.imie.montpporte.data.ZoneSQLiteAdapter;
 
@@ -20,6 +22,8 @@ public class MonTpPorteSQLiteOpenHelper extends SQLiteOpenHelper{
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL( UserSQLiteAdapter.getSchema() );
 		db.execSQL( ZoneSQLiteAdapter.getSchema() );
+		db.execSQL( CommandeSQLiteAdapter.getSchema() );
+		db.execSQL( ProductionSQLiteAdapter.getSchema() );
 		
 	}
 

@@ -15,8 +15,8 @@ public class User{
 	}
 	
 	public User(String login, String pswd) {
-		this.login = login;
-		this.password = pswd;
+		this.login 		= login;
+		this.password 	= pswd;
 	}
 	
 

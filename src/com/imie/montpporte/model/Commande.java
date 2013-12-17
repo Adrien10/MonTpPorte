@@ -6,14 +6,27 @@ public class Commande {
 
 	private int id;
 	protected int quantite;
-	protected int typeItem;
+	protected String typeItem;
 	protected String materiaux;
-	protected String idClient;
+	protected int idClient;
 
 	public Commande() {
 		// TODO Auto-generated constructor stub
 	}
+	/**
+	 * Constructor of Commande
+	 * @param quantite
+	 * @param typeIetem
+	 * @param materiaux
+	 * @param idclient
+	 */
+	public  Commande(int quantite, String typeitem, String materiaux, int idclient) {
+		this.quantite 	= quantite;
+		this.typeItem 	= typeitem;
+		this.materiaux 	= materiaux;
+		this.idClient 	= idclient;
 
+	}
 	public int getId() {
 		return id;
 	}
@@ -30,11 +43,11 @@ public class Commande {
 		this.quantite = quantite;
 	}
 
-	public int getTypeItem() {
+	public String getTypeItem() {
 		return typeItem;
 	}
 
-	public void setTypeItem(int typeItem) {
+	public void setTypeItem(String typeItem) {
 		this.typeItem = typeItem;
 	}
 
@@ -46,11 +59,11 @@ public class Commande {
 		this.materiaux = materiaux;
 	}
 
-	public String getIdClient() {
+	public int getIdClient() {
 		return idClient;
 	}
 
-	public void setIdClient(String idClient) {
+	public void setIdClient(int idClient) {
 		this.idClient = idClient;
 	}
 

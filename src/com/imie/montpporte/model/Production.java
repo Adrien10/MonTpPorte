@@ -3,11 +3,16 @@ package com.imie.montpporte.model;
 public class Production {
 
 	private int id;
-	protected Commande commade;
-	protected String typeProduit;
+	protected int commande;
+	protected int nOrdre;
 	
 	public Production() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public Production(Commande commande , int nordre) {
+		this.commande 	= commande.getId();
+		this.nOrdre 	= nordre;
 	}
 
 	public int getId() {
@@ -18,20 +23,20 @@ public class Production {
 		this.id = id;
 	}
 
-	public Commande getCommade() {
-		return commade;
+	public int getCommade() {
+		return commande;
 	}
 
-	public void setCommade(Commande commade) {
-		this.commade = commade;
+	public void setCommade(int commande) {
+		this.commande = commande;
 	}
 
-	public String getTypeProduit() {
-		return typeProduit;
+	public int getNOrdre() {
+		return nOrdre;
 	}
 
-	public void setTypeProduit(String typeProduit) {
-		this.typeProduit = typeProduit;
+	public void setNOrdre(int nordre) {
+		this.nOrdre = nordre;
 	}
 
 }

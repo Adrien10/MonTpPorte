@@ -190,11 +190,11 @@ public class UserSQLiteAdapter implements SQLiteAdapterBase<User> {
 				new String[]{String.valueOf(item.getId())});
 	}
 
-	@Override
+	/*@Override
 	public ArrayList<User> cursorToItems(Cursor c) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 	@Override
 	public ArrayList<User> getAll() {

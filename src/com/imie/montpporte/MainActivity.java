@@ -2,8 +2,12 @@ package com.imie.montpporte;
 
 
 import com.imie.montpporte.bdd.MonTpPorteSQLiteOpenHelper;
+import com.imie.montpporte.data.CommandeSQLiteAdapter;
+import com.imie.montpporte.data.ProductionSQLiteAdapter;
 import com.imie.montpporte.data.UserSQLiteAdapter;
 import com.imie.montpporte.data.ZoneSQLiteAdapter;
+import com.imie.montpporte.model.Commande;
+import com.imie.montpporte.model.Production;
 import com.imie.montpporte.model.User;
 import com.imie.montpporte.model.Zone;
 
@@ -30,6 +34,19 @@ public class MainActivity extends Activity {
 		ZoneSQLiteAdapter zonesqladapter = new ZoneSQLiteAdapter(db);
 		Zone zone = new Zone("Découpage",10);
 		zonesqladapter.insert(zone);
+		
+		CommandeSQLiteAdapter cdesqladapter = new CommandeSQLiteAdapter(db);
+		Commande cde = new Commande(2,"Porte","Acier",1);
+		cdesqladapter.insert(cde);
+		
+		ProductionSQLiteAdapter productionesqladapter =
+				new ProductionSQLiteAdapter(db);
+		int i = 1;
+		while ( i <= cde.getQuantite()){
+		Production production = new Production(cde, i);
+		productionesqladapter.insert(production);
+		i++;
+		}
 		
 	}
 

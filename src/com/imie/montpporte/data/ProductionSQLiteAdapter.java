@@ -3,30 +3,30 @@ package com.imie.montpporte.data;
 import java.util.ArrayList;
 
 import com.imie.montpporte.bdd.SQLiteAdapterBase;
-import com.imie.montpporte.model.Zone;
+import com.imie.montpporte.model.Production;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-public class ProductionSQLiteAdapter implements SQLiteAdapterBase<Zone> {
+public class ProductionSQLiteAdapter implements SQLiteAdapterBase<Production> {
 
-private static final String TAG = "ZoneDBAdapter";
+private static final String TAG = "ProductionDBAdapter";
 
 	public SQLiteDatabase db;
-	public static final String TABLE_NAME = "Zone";
+	public static final String TABLE_NAME = "Production";
 	
 	// Columns constants fields mapping
 	public static final String COL_ID = "id";
-	public static final String COL_NOM = "nom";
-	public static final String COL_QUANTITE_TAMPON = "quantite_tampon";
+	public static final String COL_ID_COMMANDE = "commande";
+	public static final String COL_NORDRE = "nOrdre";
 	
 	/** Global Fields */
 	public static final String[] COLS = new String[] {
 		COL_ID,
-		COL_NOM,
-		COL_QUANTITE_TAMPON
+		COL_ID_COMMANDE,
+		COL_NORDRE
 	};
 	
 	public String getTableName(){
@@ -41,8 +41,8 @@ private static final String TAG = "ZoneDBAdapter";
 		return "CREATE TABLE "
 		+ TABLE_NAME	+ " ("
 		+ COL_ID	+ " integer PRIMARY KEY AUTOINCREMENT,"
-		+ COL_NOM	+ " string ,"
-		+ COL_QUANTITE_TAMPON	+ " integer "
+		+ COL_ID_COMMANDE	+ " string ,"
+		+ COL_NORDRE	+ " string "
 		+ ");";
 	}
 	
@@ -50,29 +50,31 @@ private static final String TAG = "ZoneDBAdapter";
 		 this.db = db;
 	}
 
-	public static ContentValues zoneToContentValues(Zone zone) {		
+	public static ContentValues productionToContentValues(Production production) {		
 		ContentValues result = new ContentValues();		
-		result.put(	COL_ID, String.valueOf(zone.getId()) 
+		result.put(	COL_ID, String.valueOf(production.getId()) 
 					);				
-		result.put(	COL_NOM, String.valueOf(zone.getNom()) 
+		result.put(	COL_ID_COMMANDE,
+					String.valueOf(production.getCommade() )
 					);				
-		result.put(	COL_QUANTITE_TAMPON,	
-					String.valueOf(zone.getQuantite_tampon()) 
+		result.put(	COL_NORDRE,	
+					String.valueOf(production.getNOrdre()) 
 					);			
 
 		return result;
 	}
 	
-	public Zone cursorToItem(Cursor c) {
-		Zone result = null;
+	public Production cursorToItem(Cursor c) {
+		Production result = null;
 
 		if (c.getCount() != 0) {
-			result = new Zone();			
+			result = new Production();			
 
 			result.setId(c.getInt( c.getColumnIndexOrThrow(COL_ID) ));
-			result.setNom(c.getString( c.getColumnIndexOrThrow(COL_NOM) )); 
-			result.setQuantite_tampon(
-					c.getInt(c.getColumnIndexOrThrow(COL_QUANTITE_TAMPON) ));
+			result.setCommade( c.getInt(
+					c.getColumnIndexOrThrow(COL_ID_COMMANDE))); 
+			result.setNOrdre(
+					c.getInt(c.getColumnIndexOrThrow(COL_NORDRE)));
 		}
 		
 		return result;
@@ -84,20 +86,20 @@ private static final String TAG = "ZoneDBAdapter";
 	 * @param id id of entity
 	 * @return instance of user
 	 */
-	public Zone getByID(int id) {
+	public Production getByID(int id) {
 		Cursor c = this.getSingleCursor(id);
 		if(c.getCount()!=0)
 			c.moveToFirst();
-		Zone result = this.cursorToItem(c);
+		Production result = this.cursorToItem(c);
 		c.close();
 		
 		return result;
 	}
 
-	public long insert(Zone item) {
+	public long insert(Production item) {
 		Log.d(TAG, "Insert DB(" + TABLE_NAME + ")");
 		
-		ContentValues values = ProductionSQLiteAdapter.zoneToContentValues(item);
+		ContentValues values = ProductionSQLiteAdapter.productionToContentValues(item);
 		values.remove(COL_ID);
 	
 		if(values.size()!=0){
@@ -109,10 +111,10 @@ private static final String TAG = "ZoneDBAdapter";
 		}
 	}
 	@Override
-	public int update(Zone item) {
+	public int update(Production item) {
 		Log.d(TAG, "Update DB(" + TABLE_NAME + ")");
 		
-		ContentValues values = ProductionSQLiteAdapter.zoneToContentValues(item);	
+		ContentValues values = ProductionSQLiteAdapter.productionToContentValues(item);	
 		String whereClause =  COL_ID + "=? ";
 		String[] whereArgs = new String[] {String.valueOf(item.getId()) };
 		
@@ -167,7 +169,7 @@ private static final String TAG = "ZoneDBAdapter";
 	}
 
 	@Override
-	public int delete(Zone item) {
+	public int delete(Production item) {
 		return this.db.delete(
 				TABLE_NAME,
 				COL_ID+" = ?",
@@ -175,15 +177,15 @@ private static final String TAG = "ZoneDBAdapter";
 	}
 
 	@Override
-	public ArrayList<Zone> getAll() {
+	public ArrayList<Production> getAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public ArrayList<Zone> cursorToItems(Cursor c) {
+	/*@Override
+	public ArrayList<Production> cursorToItems(Cursor c) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 }

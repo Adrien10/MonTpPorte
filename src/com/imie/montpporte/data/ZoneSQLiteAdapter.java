@@ -195,10 +195,10 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 		return null;
 	}
 
-	@Override
+	/*@Override
 	public ArrayList<Zone> cursorToItems(Cursor c) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+*/
 }
