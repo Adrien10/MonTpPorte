@@ -10,52 +10,33 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-/**
- * Class ZoneSQLiteAdapter implements SQLiteAdapterBase <br/>
- * Permet la liaison base de données avec l'objet Zone
- * @author Adrien C.
- */
-public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
-/** Global Fields */
+public class CommandeSQLiteAdapter implements SQLiteAdapterBase<Zone> {
+
+private static final String TAG = "ZoneDBAdapter";
+
 	public SQLiteDatabase db;
-	private static final String TAG = "ZoneDBAdapter";
 	public static final String TABLE_NAME = "Zone";
 	
 	// Columns constants fields mapping
 	public static final String COL_ID = "id";
 	public static final String COL_NOM = "nom";
 	public static final String COL_QUANTITE_TAMPON = "quantite_tampon";
+	
+	/** Global Fields */
 	public static final String[] COLS = new String[] {
 		COL_ID,
 		COL_NOM,
 		COL_QUANTITE_TAMPON
 	};
 	
-	/** Constructors */
-	public ZoneSQLiteAdapter(SQLiteDatabase db) {
-		 this.db = db;
-	}
-
-	/** Getters/Setters */
-	
-	/**
-	 * Return table name
-	 * @return table name
-	 */
 	public String getTableName(){
 		return TABLE_NAME;
 	}
-	/**
-	 * Return columns 
-	 * @return string array of table
-	 */
+	
 	public String[] getCols(){
 		return COLS;
 	}
-	/**
-	 * Return table schema
-	 * @return string schema
-	 */
+
 	public static final String getSchema() {
 		return "CREATE TABLE "
 		+ TABLE_NAME	+ " ("
@@ -63,6 +44,10 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 		+ COL_NOM	+ " string ,"
 		+ COL_QUANTITE_TAMPON	+ " integer "
 		+ ");";
+	}
+	
+	public CommandeSQLiteAdapter(SQLiteDatabase db) {
+		 this.db = db;
 	}
 
 	public static ContentValues zoneToContentValues(Zone zone) {		
@@ -112,7 +97,7 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 	public long insert(Zone item) {
 		Log.d(TAG, "Insert DB(" + TABLE_NAME + ")");
 		
-		ContentValues values = ZoneSQLiteAdapter.zoneToContentValues(item);
+		ContentValues values = CommandeSQLiteAdapter.zoneToContentValues(item);
 		values.remove(COL_ID);
 	
 		if(values.size()!=0){
@@ -127,7 +112,7 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 	public int update(Zone item) {
 		Log.d(TAG, "Update DB(" + TABLE_NAME + ")");
 		
-		ContentValues values = ZoneSQLiteAdapter.zoneToContentValues(item);	
+		ContentValues values = CommandeSQLiteAdapter.zoneToContentValues(item);	
 		String whereClause =  COL_ID + "=? ";
 		String[] whereArgs = new String[] {String.valueOf(item.getId()) };
 		

@@ -10,25 +10,33 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+/**
+ * Class UserSQLiteAdapter implements SQLiteAdapterBase <br/>
+ * Permet la liaison base de données avec l'objet User
+ * @author Adrien C.
+ */
 public class UserSQLiteAdapter implements SQLiteAdapterBase<User> {
-
-private static final String TAG = "UserDBAdapter";
-
-	public SQLiteDatabase db;
-	public static final String TABLE_NAME = "User";
 	
+	public SQLiteDatabase db;
+	/** Global Fields */
 	// Columns constants fields mapping
+	private static final String TAG = "UserDBAdapter";
+	public static final String TABLE_NAME = "User";
 	public static final String COL_ID = "id";
 	public static final String COL_LOGIN = "login";
 	public static final String COL_PASSWORD = "password";
-	
-	/** Global Fields */
 	public static final String[] COLS = new String[] {
 		COL_ID,
 		COL_LOGIN,
 		COL_PASSWORD
 	};
 	
+	/** Constructors */
+	public UserSQLiteAdapter(SQLiteDatabase db) {
+		 this.db = db;
+	}
+	
+	/** Getters/Setters */
 	public String getTableName(){
 		return TABLE_NAME;
 	}
@@ -45,10 +53,6 @@ private static final String TAG = "UserDBAdapter";
 		+ COL_LOGIN	+ " string NOT NULL,"
 		+ COL_PASSWORD	+ " string NOT NULL"
 		+ ");";
-	}
-	
-	public UserSQLiteAdapter(SQLiteDatabase db) {
-		 this.db = db;
 	}
 
 	public static ContentValues userToContentValues(User user) {		
@@ -90,7 +94,11 @@ private static final String TAG = "UserDBAdapter";
 		
 		return result;
 	}
-
+	
+	/**
+	 * Insert entity in database
+	 * @param item item is instance of User
+ 	*/
 	public long insert(User item) {
 		Log.d(TAG, "Insert DB(" + TABLE_NAME + ")");
 		
@@ -106,6 +114,10 @@ private static final String TAG = "UserDBAdapter";
 		}
 	}
 	
+	/**
+	 * Update entity on database
+	 * @param item item is instance of User
+ 	*/
 	public int update(User item) {
 		Log.d(TAG, "Update DB(" + TABLE_NAME + ")");
 		
@@ -119,7 +131,11 @@ private static final String TAG = "UserDBAdapter";
 				whereClause, 
 				whereArgs);
 	}
-
+	
+	/**
+	 * Remove entity on database
+	 * @param item item is instance of User
+ 	*/
 	public int remove(int id) {
 		Log.d(TAG, "Delete DB(" + TABLE_NAME + ") id : "+ id);
 		
@@ -143,7 +159,6 @@ private static final String TAG = "UserDBAdapter";
 				TABLE_NAME, COLS, whereClause, whereArgs, null, null, null);
 	}
 	
-	
 	public Cursor query(int id){
 		return this.db.query(
 				TABLE_NAME,
@@ -155,7 +170,11 @@ private static final String TAG = "UserDBAdapter";
 				null);
 	}
 	
-
+	/**
+	 * Delete entity from database
+	 * @param id
+	 * @return
+	 */
 	public int delete(int id){
 		return this.db.delete(
 				TABLE_NAME,

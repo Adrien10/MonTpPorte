@@ -3,7 +3,7 @@ package com.imie.montpporte.data;
 import java.util.ArrayList;
 
 import com.imie.montpporte.bdd.SQLiteAdapterBase;
-import com.imie.montpporte.model.Zone;
+import com.imie.montpporte.model.User;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -11,83 +11,68 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 /**
- * Class ZoneSQLiteAdapter implements SQLiteAdapterBase <br/>
- * Permet la liaison base de données avec l'objet Zone
+ * Class UserSQLiteAdapter implements SQLiteAdapterBase <br/>
+ * Permet la liaison base de données avec l'objet User
  * @author Adrien C.
  */
-public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
-/** Global Fields */
-	public SQLiteDatabase db;
-	private static final String TAG = "ZoneDBAdapter";
-	public static final String TABLE_NAME = "Zone";
+public class TamponSQLiteAdapter implements SQLiteAdapterBase<User> {
 	
+	public SQLiteDatabase db;
+	/** Global Fields */
 	// Columns constants fields mapping
+	private static final String TAG = "UserDBAdapter";
+	public static final String TABLE_NAME = "User";
 	public static final String COL_ID = "id";
-	public static final String COL_NOM = "nom";
-	public static final String COL_QUANTITE_TAMPON = "quantite_tampon";
+	public static final String COL_LOGIN = "login";
+	public static final String COL_PASSWORD = "password";
 	public static final String[] COLS = new String[] {
 		COL_ID,
-		COL_NOM,
-		COL_QUANTITE_TAMPON
+		COL_LOGIN,
+		COL_PASSWORD
 	};
 	
-	/** Constructors */
-	public ZoneSQLiteAdapter(SQLiteDatabase db) {
-		 this.db = db;
-	}
-
 	/** Getters/Setters */
-	
-	/**
-	 * Return table name
-	 * @return table name
-	 */
 	public String getTableName(){
 		return TABLE_NAME;
 	}
-	/**
-	 * Return columns 
-	 * @return string array of table
-	 */
+	
 	public String[] getCols(){
 		return COLS;
 	}
-	/**
-	 * Return table schema
-	 * @return string schema
-	 */
+
 	public static final String getSchema() {
 		return "CREATE TABLE "
 		+ TABLE_NAME	+ " ("
+		
 		+ COL_ID	+ " integer PRIMARY KEY AUTOINCREMENT,"
-		+ COL_NOM	+ " string ,"
-		+ COL_QUANTITE_TAMPON	+ " integer "
+		+ COL_LOGIN	+ " string NOT NULL,"
+		+ COL_PASSWORD	+ " string NOT NULL"
 		+ ");";
 	}
+	
+	public TamponSQLiteAdapter(SQLiteDatabase db) {
+		 this.db = db;
+	}
 
-	public static ContentValues zoneToContentValues(Zone zone) {		
+	public static ContentValues userToContentValues(User user) {		
 		ContentValues result = new ContentValues();		
-		result.put(	COL_ID, String.valueOf(zone.getId()) 
-					);				
-		result.put(	COL_NOM, String.valueOf(zone.getNom()) 
-					);				
-		result.put(	COL_QUANTITE_TAMPON,	
-					String.valueOf(zone.getQuantite_tampon()) 
-					);			
+		result.put(COL_ID, 			String.valueOf(user.getId()) );				
+		result.put(COL_LOGIN, 		String.valueOf(user.getLogin()) );				
+		result.put(COL_PASSWORD, 	String.valueOf(user.getPassword()) );			
 
 		return result;
 	}
 	
-	public Zone cursorToItem(Cursor c) {
-		Zone result = null;
+	public User cursorToItem(Cursor c) {
+		User result = null;
 
 		if (c.getCount() != 0) {
-			result = new Zone();			
+			result = new User();			
 
 			result.setId(c.getInt( c.getColumnIndexOrThrow(COL_ID) ));
-			result.setNom(c.getString( c.getColumnIndexOrThrow(COL_NOM) )); 
-			result.setQuantite_tampon(
-					c.getInt(c.getColumnIndexOrThrow(COL_QUANTITE_TAMPON) ));
+			result.setLogin(c.getString( c.getColumnIndexOrThrow(COL_LOGIN) )); 
+			result.setPassword(
+					c.getString(c.getColumnIndexOrThrow(COL_PASSWORD) ));
 		}
 		
 		return result;
@@ -99,20 +84,24 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 	 * @param id id of entity
 	 * @return instance of user
 	 */
-	public Zone getByID(int id) {
+	public User getByID(int id) {
 		Cursor c = this.getSingleCursor(id);
 		if(c.getCount()!=0)
 			c.moveToFirst();
-		Zone result = this.cursorToItem(c);
+		User result = this.cursorToItem(c);
 		c.close();
 		
 		return result;
 	}
-
-	public long insert(Zone item) {
+	
+	/**
+	 * Insert entity in database
+	 * @param item item is instance of User
+ 	*/
+	public long insert(User item) {
 		Log.d(TAG, "Insert DB(" + TABLE_NAME + ")");
 		
-		ContentValues values = ZoneSQLiteAdapter.zoneToContentValues(item);
+		ContentValues values = TamponSQLiteAdapter.userToContentValues(item);
 		values.remove(COL_ID);
 	
 		if(values.size()!=0){
@@ -123,11 +112,15 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 			return -1;
 		}
 	}
-	@Override
-	public int update(Zone item) {
+	
+	/**
+	 * Update entity on database
+	 * @param item item is instance of User
+ 	*/
+	public int update(User item) {
 		Log.d(TAG, "Update DB(" + TABLE_NAME + ")");
 		
-		ContentValues values = ZoneSQLiteAdapter.zoneToContentValues(item);	
+		ContentValues values = TamponSQLiteAdapter.userToContentValues(item);	
 		String whereClause =  COL_ID + "=? ";
 		String[] whereArgs = new String[] {String.valueOf(item.getId()) };
 		
@@ -137,7 +130,11 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 				whereClause, 
 				whereArgs);
 	}
-
+	
+	/**
+	 * Remove entity on database
+	 * @param item item is instance of User
+ 	*/
 	public int remove(int id) {
 		Log.d(TAG, "Delete DB(" + TABLE_NAME + ") id : "+ id);
 		
@@ -161,7 +158,6 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 				TABLE_NAME, COLS, whereClause, whereArgs, null, null, null);
 	}
 	
-	
 	public Cursor query(int id){
 		return this.db.query(
 				TABLE_NAME,
@@ -173,7 +169,11 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 				null);
 	}
 	
-	
+	/**
+	 * Delete entity from database
+	 * @param id
+	 * @return
+	 */
 	public int delete(int id){
 		return this.db.delete(
 				TABLE_NAME,
@@ -182,7 +182,7 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 	}
 
 	@Override
-	public int delete(Zone item) {
+	public int delete(User item) {
 		return this.db.delete(
 				TABLE_NAME,
 				COL_ID+" = ?",
@@ -190,15 +190,15 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 	}
 
 	@Override
-	public ArrayList<Zone> getAll() {
+	public ArrayList<User> cursorToItems(Cursor c) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<Zone> cursorToItems(Cursor c) {
+	public ArrayList<User> getAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 }
