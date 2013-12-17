@@ -3,12 +3,13 @@ package com.imie.montpporte;
 
 import com.imie.montpporte.bdd.MonTpPorteSQLiteOpenHelper;
 import com.imie.montpporte.data.UserSQLiteAdapter;
+import com.imie.montpporte.data.ZoneSQLiteAdapter;
 import com.imie.montpporte.model.User;
+import com.imie.montpporte.model.Zone;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
@@ -25,6 +26,11 @@ public class MainActivity extends Activity {
 		UserSQLiteAdapter usersqladapter = new UserSQLiteAdapter(db);
 		User u = new User("Adrien","password");
 		usersqladapter.insert(u);
+		
+		ZoneSQLiteAdapter zonesqladapter = new ZoneSQLiteAdapter(db);
+		Zone zone = new Zone("Découpage",10);
+		zonesqladapter.insert(zone);
+		
 	}
 
 	@Override

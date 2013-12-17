@@ -1,6 +1,7 @@
 package com.imie.montpporte.bdd;
 
 import com.imie.montpporte.data.UserSQLiteAdapter;
+import com.imie.montpporte.data.ZoneSQLiteAdapter;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,6 +19,7 @@ public class MonTpPorteSQLiteOpenHelper extends SQLiteOpenHelper{
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL( UserSQLiteAdapter.getSchema() );
+		db.execSQL( ZoneSQLiteAdapter.getSchema() );
 		
 	}
 

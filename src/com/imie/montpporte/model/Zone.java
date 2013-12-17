@@ -9,14 +9,14 @@ public class Zone  {
 	
 	protected int id;
 	protected String nom;
-	protected int quantite_tampo;
+	protected int quantite_tampon;
 	
 	public Zone() {
 	}
 	
-	public Zone(String nom, int quantite_tampo) {
+	public Zone(String nom, int quantite_tampon) {
 		this.nom = nom;
-		this.quantite_tampo = quantite_tampo;
+		this.quantite_tampon = quantite_tampon;
 	}
 
 	public int getId() {
@@ -35,12 +35,12 @@ public class Zone  {
 		this.nom = nom;
 	}
 
-	public int getQuantite_tampo() {
-		return quantite_tampo;
+	public int getQuantite_tampon() {
+		return quantite_tampon;
 	}
 
-	public void setQuantite_tampo(int quantite_tampo) {
-		this.quantite_tampo = quantite_tampo;
+	public void setQuantite_tampon(int quantite_tampon) {
+		this.quantite_tampon = quantite_tampon;
 	}
 	
 
