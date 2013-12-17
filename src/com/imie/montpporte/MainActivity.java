@@ -13,8 +13,10 @@ import com.imie.montpporte.model.Zone;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
+import android.view.MenuItem;
 
 public class MainActivity extends Activity {
 
@@ -54,7 +56,31 @@ public class MainActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+		//return true;
+		return super.onCreateOptionsMenu(menu);
 	}
+	
+	 @Override
+	    public boolean onOptionsItemSelected(MenuItem item) {
+	        // Take appropriate action for each action item click
+	        switch (item.getItemId()) {
+	        case R.id.action_gestiondonnees:
+	        	GestionDonnees();
+	            return true;
+	        case R.id.action_settings:
+	            // check for updates action
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	        }
+	    }
+	 
+	    /**
+	     * Launching new activity
+	     * */
+	    private void GestionDonnees() {
+	        Intent i = new Intent(MainActivity.this, GestionDonneesActivity.class);
+	        startActivity(i);
+	    }
 
 }

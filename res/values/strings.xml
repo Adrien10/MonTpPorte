@@ -3,6 +3,6 @@
 
     <string name="app_name">MonTpPorte</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="action_gestiondonnees">Gestion des données</string>
     <string name="app_version">1.0</string>
 </resources>
