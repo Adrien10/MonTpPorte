@@ -73,6 +73,7 @@ public class MainActivity extends Activity {
 				String nameValue = login.getText().toString();
 				String pwdValue = pwd.getText().toString();
 				User user = adapter.getByLogin(nameValue);
+				
 				if( nameValue != null && pwdValue != null && user!= null )
 				{
 					if(user.getPassword().toString().equals(pwdValue)){
