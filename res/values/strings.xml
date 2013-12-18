@@ -7,4 +7,12 @@
     <string name="app_version">1.0</string>
     <string name="station">Station :</string>
     <string name="action_info">Info</string>
+    <string-array name="action_array">
+        <item>Utilisateur</item>
+        <item>Commande</item>
+        <item>Station</item>
+    </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+<string name="action_websearch">Close navigation drawer</string>
 </resources>
