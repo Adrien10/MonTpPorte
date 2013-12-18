@@ -17,6 +17,6 @@
         android:layout_below="@+id/spinnerListeProduction"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="47dp"
-        android:text="Button" />
+        android:text="Démarrer" />
 
 </RelativeLayout>
