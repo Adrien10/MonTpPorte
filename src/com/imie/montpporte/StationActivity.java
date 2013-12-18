@@ -18,7 +18,7 @@ public class StationActivity extends Activity  {
         // Enabling Up / Back navigation
         actionBar.setDisplayHomeAsUpEnabled(true);
         
-    	//Spinner spinner = (Spinner) findViewById(R.id.spinnerListeProduction);
+    	Spinner spinner = (Spinner) findViewById(R.id.spinnerListeProduction);
     	
     	
 	}
