@@ -17,6 +17,10 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -30,7 +34,7 @@ public class MainActivity extends Activity {
 		SQLiteDatabase db = helper.getWritableDatabase() ;
 		
 		UserSQLiteAdapter usersqladapter = new UserSQLiteAdapter(db);
-		User u = new User("Adrien","password");
+		User u = new User("Adrien","pswd");
 		usersqladapter.insert(u);
 		
 		ZoneSQLiteAdapter zonesqladapter = new ZoneSQLiteAdapter(db);
@@ -49,6 +53,16 @@ public class MainActivity extends Activity {
 		productionesqladapter.insert(production);
 		i++;
 		}
+		
+		Button btnConnexion = (Button) this.findViewById(R.id.btnConnexion);        
+        btnConnexion.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 	}
 
@@ -82,5 +96,28 @@ public class MainActivity extends Activity {
 	        Intent i = new Intent(MainActivity.this, GestionDonneesActivity.class);
 	        startActivity(i);
 	    }
-
+	    
+	    public void onClick(View v) {
+			
+			Button btn = (Button) v;
+			
+			btn.getId();
+			
+			Button button = (Button) this.findViewById(R.id.btnConnexion);
+	        
+			if (v == button) {
+				Toast tt = Toast.makeText(this, "Hello", Toast.LENGTH_LONG);
+				tt.show();
+				
+				User user = new User();
+				user.setLogin("Adrien");
+				user.setPassword("a");
+				
+				Intent intent = new Intent(this, StationActivity.class);
+				this.startActivity(intent);
+				//this.startActivityForResult(intent, 1);
+				//this.finish();
+			}
+			
+		}
 }
