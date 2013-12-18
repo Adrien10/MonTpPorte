@@ -73,7 +73,8 @@ public class MainActivity extends Activity {
 				String nameValue = login.getText().toString();
 				String pwdValue = pwd.getText().toString();
 				User user = adapter.getByLogin(nameValue);
-				if( nameValue != null && pwdValue != null && user!= null )
+				
+				if( nameValue != null && pwdValue != null && user != null )
 				{
 					if(user.getPassword().toString().equals(pwdValue)){
 						//Display Welcome Toast
@@ -96,7 +97,8 @@ public class MainActivity extends Activity {
 		});
 		
 	}
-
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
