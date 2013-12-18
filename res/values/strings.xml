@@ -9,4 +9,10 @@
     <string name="action_info">Info</string>
     <string name="station_btndemarrer">Démarrer</string>
     <string name="sation_btnterminer">Terminer</string>
+        <item>Commande</item>
+        <item>Station</item>
+    </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+<string name="action_websearch">Close navigation drawer</string>
 </resources>

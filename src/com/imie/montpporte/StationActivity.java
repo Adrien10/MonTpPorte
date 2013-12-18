@@ -94,6 +94,9 @@ public class StationActivity extends Activity  {
         }
     }
     
+    /**
+     * Function to display information in a dialog box about the user
+     */
     public void displayDialog(){
 
     	User user = (User) this.getIntent()
