@@ -39,4 +39,10 @@ public class Production {
 		this.nOrdre = nordre;
 	}
 
+	@Override
+	public String toString() {
+		String s = this.getCommande() + "|" + this.getNOrdre();
+		return s;
+	}
+
 }

@@ -4,12 +4,8 @@ package com.imie.montpporte;
 import java.util.ArrayList;
 
 import com.imie.montpporte.bdd.MonTpPorteSQLiteOpenHelper;
-import com.imie.montpporte.data.CommandeSQLiteAdapter;
-import com.imie.montpporte.data.ProductionSQLiteAdapter;
 import com.imie.montpporte.data.UserSQLiteAdapter;
 import com.imie.montpporte.data.ZoneSQLiteAdapter;
-import com.imie.montpporte.model.Commande;
-import com.imie.montpporte.model.Production;
 import com.imie.montpporte.model.User;
 import com.imie.montpporte.model.Zone;
 
@@ -35,54 +31,26 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		final MonTpPorteSQLiteOpenHelper helper = new MonTpPorteSQLiteOpenHelper(
-				this, "dbPorte", null, R.string.app_version);
-		SQLiteDatabase db = helper.getWritableDatabase() ;
+		final MonTpPorteSQLiteOpenHelper helper = new 
+				MonTpPorteSQLiteOpenHelper(this, "dbPorte",
+						null, R.string.app_version);
 		
-		UserSQLiteAdapter usersqladapter = new UserSQLiteAdapter(db);
-		User u = new User("a","a");
-		usersqladapter.insert(u);
-		
+		SQLiteDatabase db = helper.getDb();
 		ZoneSQLiteAdapter zonesqladapter = new ZoneSQLiteAdapter(db);
-		Zone zone = new Zone("Découpage",10);
-		Zone zone2 = new Zone("Façonnage",10);
-		Zone zone3 = new Zone("Peinture",10);
-		Zone zone4 = new Zone("Assemblage",10);
-		zonesqladapter.insert(zone);
-		zonesqladapter.insert(zone2);
-		zonesqladapter.insert(zone3);
-		zonesqladapter.insert(zone4);
-		
 		ArrayList<Zone>  zones = zonesqladapter.getAll();
 		
 		Spinner s = (Spinner) this.findViewById(R.id.spinnerStations);
 		ArrayAdapter<Zone> spinnerArrayAdapter = new ArrayAdapter<Zone>(this,
 			        android.R.layout.simple_spinner_dropdown_item,zones);
 			    s.setAdapter(spinnerArrayAdapter);
-	
-		
-		CommandeSQLiteAdapter cdesqladapter = new CommandeSQLiteAdapter(db);
-		Commande cde = new Commande(2,"Porte","Acier",1);
-		cdesqladapter.insert(cde);
-		
-		ProductionSQLiteAdapter productionesqladapter =
-				new ProductionSQLiteAdapter(db);
-		int i = 1;
-		while ( i <= cde.getQuantite()){
-		Production production = new Production(cde, i);
-		productionesqladapter.insert(production);
-		i++;
-		}
 		
 		Button btnConnexion = (Button) this.findViewById(R.id.btnConnexion);        
         btnConnexion.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				
-				UserSQLiteAdapter adapter = new UserSQLiteAdapter(
-						helper.getWritableDatabase());
-				
+				SQLiteDatabase db = helper.getDb();
+				UserSQLiteAdapter useradapter = new UserSQLiteAdapter(db);
 				EditText login = (EditText) MainActivity.this.findViewById(
 						R.id.editTextLogin);
 				EditText pwd = (EditText) MainActivity.this.findViewById(
@@ -90,7 +58,7 @@ public class MainActivity extends Activity {
 				
 				String nameValue = login.getText().toString();
 				String pwdValue = pwd.getText().toString();
-				User user = adapter.getByLogin(nameValue);
+				User user = useradapter.getByLogin(nameValue);
 				
 				if( nameValue != null && pwdValue != null && user != null )
 				{
@@ -100,7 +68,8 @@ public class MainActivity extends Activity {
 								"Bienvenue "+user.getLogin().toString(),  
 								Toast.LENGTH_LONG);
 						toast.show();
-						Intent i = new Intent(MainActivity.this, StationActivity.class);
+						Intent i = new Intent(MainActivity.this,
+								StationActivity.class);
 				        startActivity(i);
 					}else{
 						Toast toast = Toast.makeText(MainActivity.this, 
@@ -112,8 +81,7 @@ public class MainActivity extends Activity {
 							"Données non valides",  Toast.LENGTH_LONG);
 					toast.show();
 				}
-				
-				
+				db.close();
 			}
 		});
 		
@@ -147,7 +115,8 @@ public class MainActivity extends Activity {
 	     * Launching new activity
 	     * */
 	    private void GestionDonnees() {
-	        Intent i = new Intent(MainActivity.this, GestionDonneesActivity.class);
+	        Intent i = new Intent(MainActivity.this,
+	        		GestionDonneesActivity.class);
 	        startActivity(i);
 	    }
 	    

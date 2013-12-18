@@ -50,6 +50,8 @@ private static final String TAG = "ProductionDBAdapter";
 	
 	public ProductionSQLiteAdapter(SQLiteDatabase db) {
 		 this.db = db;
+		 
+		 
 	}
 
 	public static ContentValues productionToContentValues(Production production) {		

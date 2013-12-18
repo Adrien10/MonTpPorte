@@ -3,9 +3,7 @@ package com.imie.montpporte.data;
 import java.util.ArrayList;
 
 import com.imie.montpporte.bdd.SQLiteAdapterBase;
-import com.imie.montpporte.model.Commande;
 import com.imie.montpporte.model.User;
-
 
 import android.content.ContentValues;
 import android.database.Cursor;
