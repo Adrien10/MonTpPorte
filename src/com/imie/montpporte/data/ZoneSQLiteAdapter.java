@@ -3,7 +3,6 @@ package com.imie.montpporte.data;
 import java.util.ArrayList;
 
 import com.imie.montpporte.bdd.SQLiteAdapterBase;
-import com.imie.montpporte.model.User;
 import com.imie.montpporte.model.Zone;
 
 import android.content.ContentValues;

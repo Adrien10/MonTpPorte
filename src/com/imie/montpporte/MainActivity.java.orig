@@ -32,15 +32,27 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+<<<<<<< HEAD
+		final MonTpPorteSQLiteOpenHelper helper = 
+				new MonTpPorteSQLiteOpenHelper(
+				this, "dbPorte", null, R.string.app_version);
+		final SQLiteDatabase db = helper.getWritableDatabase() ;
+		
+		UserSQLiteAdapter usersqladapter = new UserSQLiteAdapter(db);
+		User u = new User("a","a");
+		usersqladapter.insert(u);
+=======
 		final MonTpPorteSQLiteOpenHelper helper = new 
 				MonTpPorteSQLiteOpenHelper(this, "dbPorte",
 						null, R.string.app_version);
+>>>>>>> 0d89d8cae6aa58471381525322033d4aa2e8b353
 		
 		SQLiteDatabase db = helper.getDb();
 		ZoneSQLiteAdapter zonesqladapter = new ZoneSQLiteAdapter(db);
 		ArrayList<Zone>  zones = zonesqladapter.getAll();
 		
-		Spinner s = (Spinner) this.findViewById(R.id.spinnerStations);
+		//Spinner to display different zone
+		final Spinner s = (Spinner) this.findViewById(R.id.spinnerStations);
 		ArrayAdapter<Zone> spinnerArrayAdapter = new ArrayAdapter<Zone>(this,
 			        android.R.layout.simple_spinner_dropdown_item,zones);
 			    s.setAdapter(spinnerArrayAdapter);
@@ -69,11 +81,17 @@ public class MainActivity extends Activity {
 								"Bienvenue "+user.getLogin().toString(),  
 								Toast.LENGTH_LONG);
 						toast.show();
-						Intent i = new Intent(MainActivity.this,
+<<<<<<< HEAD
+						Intent i = new Intent(MainActivity.this, 
 								StationActivity.class);
 						i.putExtra("user", user);
 						i.putExtra("station", s.getSelectedItem().toString());
 						MainActivity.this.startActivity(i);
+=======
+						Intent i = new Intent(MainActivity.this,
+								StationActivity.class);
+				        startActivity(i);
+>>>>>>> 0d89d8cae6aa58471381525322033d4aa2e8b353
 					}else{
 						Toast toast = Toast.makeText(MainActivity.this, 
 								"Mauvais mot de passe",  Toast.LENGTH_LONG);
