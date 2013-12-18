@@ -29,6 +29,12 @@
             android:label="@string/action_gestiondonnees"
             android:parentActivityName="com.imie.montpporte.MainActivity" >
         </activity>
+        !-- Station activity -->
+        <activity
+            android:name="com.imie.montpporte.StationActivity"
+            android:label="@string/station"
+            android:parentActivityName="com.imie.montpporte.StationActivity" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,15 +1,8 @@
 package com.imie.montpporte;
 
-import com.imie.montpporte.model.Production;
-
-
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.LauncherActivity.ListItem;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 
 public class StationActivity extends Activity  {
@@ -25,6 +18,8 @@ public class StationActivity extends Activity  {
         // Enabling Up / Back navigation
         actionBar.setDisplayHomeAsUpEnabled(true);
         
-    	Spinner spinner = (Spinner) findViewById(R.id.spinnerListeProduction);
+    	//Spinner spinner = (Spinner) findViewById(R.id.spinnerListeProduction);
+    	
+    	
 	}
 }

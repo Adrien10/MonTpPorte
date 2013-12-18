@@ -73,17 +73,20 @@ public class MainActivity extends Activity {
 				String nameValue = login.getText().toString();
 				String pwdValue = pwd.getText().toString();
 				User user = adapter.getByLogin(nameValue);
-				
-				if(user.getPassword().toString().equals(pwdValue)){
-					//Display Welcome Toast
-					Toast toast = Toast.makeText(MainActivity.this, 
-							"Bienvenue "+user.getLogin().toString(),  
-							Toast.LENGTH_LONG);
-					toast.show();
-					Intent i = new Intent(MainActivity.this, StationActivity.class);
-			        startActivity(i);
-					
-				}else{
+				if( nameValue != null && pwdValue != null && user!= null )
+				{
+					if(user.getPassword().toString().equals(pwdValue)){
+						//Display Welcome Toast
+						Toast toast = Toast.makeText(MainActivity.this, 
+								"Bienvenue "+user.getLogin().toString(),  
+								Toast.LENGTH_LONG);
+						toast.show();
+						Intent i = new Intent(MainActivity.this, StationActivity.class);
+				        startActivity(i);
+						
+					}
+				}
+				else{
 					Toast toast = Toast.makeText(MainActivity.this, 
 							"Mauvais mot de passe",  Toast.LENGTH_LONG);
 					toast.show();
