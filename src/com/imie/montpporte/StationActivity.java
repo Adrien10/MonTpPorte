@@ -1,6 +1,5 @@
 package com.imie.montpporte;
 
-
 import com.imie.montpporte.model.User;
 
 import java.util.ArrayList;
@@ -9,7 +8,6 @@ import com.imie.montpporte.bdd.MonTpPorteSQLiteOpenHelper;
 import com.imie.montpporte.data.ProductionSQLiteAdapter;
 import com.imie.montpporte.model.Production;
 
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,7 +15,6 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class StationActivity extends Activity  {
 	
@@ -31,9 +28,6 @@ public class StationActivity extends Activity  {
         ActionBar actionBar = getActionBar();
         // Enabling Up / Back navigation
         actionBar.setDisplayHomeAsUpEnabled(true);
-        
-
-    	Spinner spinner = (Spinner) findViewById(R.id.spinnerListeProduction);
     	
     	User user = (User) this.getIntent()
         		.getSerializableExtra("user");
