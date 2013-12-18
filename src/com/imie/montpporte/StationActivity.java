@@ -1,6 +1,7 @@
 package com.imie.montpporte;
 
 import com.imie.montpporte.model.User;
+import com.imie.montpporte.model.Zone;
 
 import java.util.ArrayList;
 
@@ -10,8 +11,12 @@ import com.imie.montpporte.model.Production;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,11 +34,12 @@ public class StationActivity extends Activity  {
         // Enabling Up / Back navigation
         actionBar.setDisplayHomeAsUpEnabled(true);
     	
-    	User user = (User) this.getIntent()
-        		.getSerializableExtra("user");
-    	TextView Hello = (TextView) StationActivity.this
-				.findViewById(R.id.textViewUser);
-    	Hello.setText(user.getLogin());
+    	Zone zone = (Zone) this.getIntent()
+        		.getSerializableExtra("station");
+    	
+    	this.setTitle("Station : "+ zone.toString());
+    	
+    	
 
         MonTpPorteSQLiteOpenHelper helper = new 
 				MonTpPorteSQLiteOpenHelper(this, "dbPorte",
@@ -52,4 +58,41 @@ public class StationActivity extends Activity  {
 			    s.setAdapter(spinnerArrayAdapter);
 
 	}
+    
+    @Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_station, menu);
+		
+		return super.onCreateOptionsMenu(menu);
+	}
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Take appropriate action for each action item click
+        switch (item.getItemId()) {
+        case R.id.action_info:
+        	displayDialog();
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
+    
+    public void displayDialog(){
+
+    	User user = (User) this.getIntent()
+        		.getSerializableExtra("user");
+    	
+    	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+    	alertDialog.setTitle("Utilisateur connecté");
+    	alertDialog.setMessage(user.getLogin());
+    	alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+    	public void onClick(DialogInterface dialog, int which) {
+    	// here you can add functions
+    	}
+    	});
+    	alertDialog.setIcon(R.drawable.ic_action_about);
+    	alertDialog.show();
+    }
 }
