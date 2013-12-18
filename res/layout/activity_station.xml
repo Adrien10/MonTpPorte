@@ -14,9 +14,18 @@
         android:id="@+id/btnStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spinnerListeProduction"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="47dp"
+        android:layout_centerVertical="true"
         android:text="Démarrer" />
+
+    <TextView
+        android:id="@+id/textViewUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="14dp"
+        android:layout_marginLeft="21dp"
+        android:layout_toRightOf="@+id/btnStart"
+        android:text="TextView" />
 
 </RelativeLayout>

@@ -1,9 +1,13 @@
 package com.imie.montpporte;
 
+import com.imie.montpporte.model.User;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class StationActivity extends Activity  {
 	
@@ -13,6 +17,7 @@ public class StationActivity extends Activity  {
         this.setContentView(R.layout.activity_station);
         //this.setResult(RESULT_CANCELED); 
         
+       
         // récupère action bar  
         ActionBar actionBar = getActionBar();
         // Enabling Up / Back navigation
@@ -20,6 +25,11 @@ public class StationActivity extends Activity  {
         
     	Spinner spinner = (Spinner) findViewById(R.id.spinnerListeProduction);
     	
+    	User user = (User) this.getIntent()
+        		.getSerializableExtra("user");
+    	TextView Hello = (TextView) StationActivity.this
+				.findViewById(R.id.textViewUser);
+    	Hello.setText(user.getLogin());
     	
 	}
 }

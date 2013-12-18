@@ -1,8 +1,14 @@
 package com.imie.montpporte.model;
 
+import java.io.Serializable;
 
-public class User{
 
+public class User implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1829571294030623559L;
 	/**
 	 * USER
 	 */

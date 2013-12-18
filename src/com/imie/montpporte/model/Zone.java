@@ -1,8 +1,14 @@
 package com.imie.montpporte.model;
 
+import java.io.Serializable;
 
-public class Zone  {
 
+public class Zone  implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8593042547455909477L;
 	/**
 	 * Zone
 	 */
