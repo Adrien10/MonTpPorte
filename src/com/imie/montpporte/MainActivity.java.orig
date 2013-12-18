@@ -74,7 +74,11 @@ public class MainActivity extends Activity {
 				String pwdValue = pwd.getText().toString();
 				User user = adapter.getByLogin(nameValue);
 				
+<<<<<<< HEAD
 				if( nameValue != null && pwdValue != null && user != null )
+=======
+				if( nameValue != null && pwdValue != null && user!= null )
+>>>>>>> 4d0773bc2405b4d4185ca4ab7b36f4893b1a7d04
 				{
 					if(user.getPassword().toString().equals(pwdValue)){
 						//Display Welcome Toast

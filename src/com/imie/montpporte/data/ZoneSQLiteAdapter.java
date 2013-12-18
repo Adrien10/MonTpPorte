@@ -25,10 +25,12 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 	public static final String COL_ID = "id";
 	public static final String COL_NOM = "nom";
 	public static final String COL_QUANTITE_TAMPON = "quantite_tampon";
+	public static final String COL_ETAT = "etat";
 	public static final String[] COLS = new String[] {
 		COL_ID,
 		COL_NOM,
-		COL_QUANTITE_TAMPON
+		COL_QUANTITE_TAMPON,
+		COL_ETAT
 	};
 	
 	/** Constructors */
@@ -61,7 +63,8 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 		+ TABLE_NAME	+ " ("
 		+ COL_ID	+ " integer PRIMARY KEY AUTOINCREMENT,"
 		+ COL_NOM	+ " string ,"
-		+ COL_QUANTITE_TAMPON	+ " integer "
+		+ COL_QUANTITE_TAMPON	+ " integer ,"
+		+ COL_ETAT	+ " boolean "
 		+ ");";
 	}
 
@@ -73,7 +76,10 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 					);				
 		result.put(	COL_QUANTITE_TAMPON,	
 					String.valueOf(zone.getQuantite_tampon()) 
-					);			
+					);
+		result.put(	COL_ETAT,	
+				String.valueOf(zone.getEtat()) 
+				);	
 
 		return result;
 	}
@@ -88,6 +94,8 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 			result.setNom(c.getString( c.getColumnIndexOrThrow(COL_NOM) )); 
 			result.setQuantite_tampon(
 					c.getInt(c.getColumnIndexOrThrow(COL_QUANTITE_TAMPON) ));
+			result.setQuantite_tampon(
+					c.getInt(c.getColumnIndexOrThrow(COL_ETAT) ));
 		}
 		
 		return result;

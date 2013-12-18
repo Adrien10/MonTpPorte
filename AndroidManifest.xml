@@ -33,7 +33,7 @@
         <activity
             android:name="com.imie.montpporte.StationActivity"
             android:label="@string/station"
-            android:parentActivityName="com.imie.montpporte.StationActivity" >
+            android:parentActivityName="com.imie.montpporte.MainActivity" >
         </activity>
     </application>
 
