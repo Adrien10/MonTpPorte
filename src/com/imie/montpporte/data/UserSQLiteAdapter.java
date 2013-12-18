@@ -3,6 +3,7 @@ package com.imie.montpporte.data;
 import java.util.ArrayList;
 
 import com.imie.montpporte.bdd.SQLiteAdapterBase;
+import com.imie.montpporte.model.Commande;
 import com.imie.montpporte.model.User;
 
 
@@ -220,8 +221,27 @@ public class UserSQLiteAdapter implements SQLiteAdapterBase<User> {
 
 	@Override
 	public ArrayList<User> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<User> users = new ArrayList<User>();
+		
+    	Cursor cursor = db.query(TABLE_NAME, 
+        		 COLS, null,
+                null, null, null, null, null);
+ 
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+            	User user = new User();
+            	user.setId(Integer.parseInt(cursor.getString(0)));
+            	user.setLogin(cursor.getString(1));
+            	user.setPassword(cursor.getString(2));
+                // Adding user to list
+            	users.add(user);
+            } while (cursor.moveToNext());
+        }
+ 
+        // return commande list
+        return users;
+			
 	}
 	
 }

@@ -1,6 +1,8 @@
 package com.imie.montpporte;
 
 
+import java.util.ArrayList;
+
 import com.imie.montpporte.bdd.MonTpPorteSQLiteOpenHelper;
 import com.imie.montpporte.data.CommandeSQLiteAdapter;
 import com.imie.montpporte.data.ProductionSQLiteAdapter;
@@ -20,8 +22,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -41,7 +45,21 @@ public class MainActivity extends Activity {
 		
 		ZoneSQLiteAdapter zonesqladapter = new ZoneSQLiteAdapter(db);
 		Zone zone = new Zone("Découpage",10);
+		Zone zone2 = new Zone("Façonnage",10);
+		Zone zone3 = new Zone("Peinture",10);
+		Zone zone4 = new Zone("Assemblage",10);
 		zonesqladapter.insert(zone);
+		zonesqladapter.insert(zone2);
+		zonesqladapter.insert(zone3);
+		zonesqladapter.insert(zone4);
+		
+		ArrayList<Zone>  zones = zonesqladapter.getAll();
+		
+		Spinner s = (Spinner) this.findViewById(R.id.spinnerStations);
+		ArrayAdapter<Zone> spinnerArrayAdapter = new ArrayAdapter<Zone>(this,
+			        android.R.layout.simple_spinner_dropdown_item,zones);
+			    s.setAdapter(spinnerArrayAdapter);
+	
 		
 		CommandeSQLiteAdapter cdesqladapter = new CommandeSQLiteAdapter(db);
 		Commande cde = new Commande(2,"Porte","Acier",1);

@@ -10,7 +10,7 @@ public class Zone  {
 	protected int id;
 	protected String nom;
 	protected int quantite_tampon;
-	protected Boolean etat;
+	protected int etat;
 	
 	public Zone() {
 	}
@@ -18,7 +18,13 @@ public class Zone  {
 	public Zone(String nom, int quantite_tampon) {
 		this.nom = nom;
 		this.quantite_tampon = quantite_tampon;
-		this.etat=false;
+		this.etat=0;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.nom;
 	}
 
 	public int getId() {
@@ -45,11 +51,11 @@ public class Zone  {
 		this.quantite_tampon = quantite_tampon;
 	}
 
-	public Boolean getEtat() {
+	public int getEtat() {
 		return etat;
 	}
 
-	public void setEtat(Boolean etat) {
+	public void setEtat(int etat) {
 		this.etat = etat;
 	}
 	

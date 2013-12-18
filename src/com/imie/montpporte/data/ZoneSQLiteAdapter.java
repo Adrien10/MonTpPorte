@@ -3,6 +3,7 @@ package com.imie.montpporte.data;
 import java.util.ArrayList;
 
 import com.imie.montpporte.bdd.SQLiteAdapterBase;
+import com.imie.montpporte.model.User;
 import com.imie.montpporte.model.Zone;
 
 import android.content.ContentValues;
@@ -64,7 +65,7 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 		+ COL_ID	+ " integer PRIMARY KEY AUTOINCREMENT,"
 		+ COL_NOM	+ " string ,"
 		+ COL_QUANTITE_TAMPON	+ " integer ,"
-		+ COL_ETAT	+ " boolean "
+		+ COL_ETAT	+ " integer "
 		+ ");";
 	}
 
@@ -199,8 +200,27 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 
 	@Override
 	public ArrayList<Zone> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Zone> zones = new ArrayList<Zone>();
+		
+    	Cursor cursor = db.query(TABLE_NAME, 
+        		 COLS, null,
+                null, null, null, null, null);
+ 
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+            	Zone zone = new Zone();
+            	zone.setId(Integer.parseInt(cursor.getString(0)));
+            	zone.setNom(cursor.getString(1));
+            	zone.setQuantite_tampon(Integer.parseInt(cursor.getString(2)));
+            	zone.setEtat(Integer.parseInt(cursor.getString(3)));
+                // Adding zone to list
+            	zones.add(zone);
+            } while (cursor.moveToNext());
+        }
+ 
+        // return zones list
+        return zones;
 	}
 
 	/*@Override

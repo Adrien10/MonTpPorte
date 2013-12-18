@@ -196,8 +196,7 @@ private static final String TAG = "CommandeDBAdapter";
 		ArrayList<Commande> commandes = new ArrayList<Commande>();
 		
     	Cursor cursor = db.query(TABLE_NAME, 
-        		new String[] { COL_ID, COL_QUANTITE, COL_TYPE_ITEM,
-    			COL_MATERIAUX,COL_ID_CLIENT }, null,
+        		 COLS, null,
                 null, null, null, null, null);
  
         // looping through all rows and adding to list

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.imie.montpporte.bdd.SQLiteAdapterBase;
 import com.imie.montpporte.model.Production;
+import com.imie.montpporte.model.User;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -178,7 +179,6 @@ private static final String TAG = "ProductionDBAdapter";
 
 	@Override
 	public ArrayList<Production> getAll() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
