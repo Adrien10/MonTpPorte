@@ -13,6 +13,8 @@ import com.imie.montpporte.model.Production;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
@@ -35,17 +37,12 @@ public class StationActivity extends Activity  {
         // Enabling Up / Back navigation
         actionBar.setDisplayHomeAsUpEnabled(true);
     	
-    	User user = (User) this.getIntent()
-        		.getSerializableExtra("user");
-    	
     	Zone zone = (Zone) this.getIntent()
         		.getSerializableExtra("station");
     	
     	this.setTitle("Station : "+ zone.toString());
     	
-    	TextView Hello = (TextView) StationActivity.this
-				.findViewById(R.id.textViewUser);
-    	Hello.setText(user.getLogin());
+    	
 
         MonTpPorteSQLiteOpenHelper helper = new 
 				MonTpPorteSQLiteOpenHelper(this, "dbPorte",
@@ -78,13 +75,27 @@ public class StationActivity extends Activity  {
         // Take appropriate action for each action item click
         switch (item.getItemId()) {
         case R.id.action_info:
-
-            return true;
-        case R.id.action_settings:
-            // check for updates action
+        	displayDialog();
             return true;
         default:
             return super.onOptionsItemSelected(item);
         }
+    }
+    
+    public void displayDialog(){
+
+    	User user = (User) this.getIntent()
+        		.getSerializableExtra("user");
+    	
+    	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+    	alertDialog.setTitle("Utilisateur connecté");
+    	alertDialog.setMessage(user.getLogin());
+    	alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+    	public void onClick(DialogInterface dialog, int which) {
+    	// here you can add functions
+    	}
+    	});
+    	alertDialog.setIcon(R.drawable.ic_action_about);
+    	alertDialog.show();
     }
 }
