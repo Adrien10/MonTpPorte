@@ -1,10 +1,10 @@
 package com.imie.montpporte;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 
-public class GestionDonneesActivity extends FragmentActivity {
+public class GestionDonneesActivity extends Activity {
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
