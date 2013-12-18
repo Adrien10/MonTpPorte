@@ -3,7 +3,7 @@ package com.imie.montpporte.model;
 import java.io.Serializable;
 
 
-public class Zone  implements Serializable{
+public class Zone implements Serializable{
 
 	/**
 	 * 
