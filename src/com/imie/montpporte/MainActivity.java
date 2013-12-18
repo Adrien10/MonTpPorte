@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
 						Intent i = new Intent(MainActivity.this,
 								StationActivity.class);
 						i.putExtra("user", user);
-						i.putExtra("station", s.getSelectedItem().toString());
+						i.putExtra("station", (Zone) s.getSelectedItem());
 						MainActivity.this.startActivity(i);
 					}else{
 						Toast toast = Toast.makeText(MainActivity.this, 

@@ -2,6 +2,7 @@ package com.imie.montpporte;
 
 
 import com.imie.montpporte.model.User;
+import com.imie.montpporte.model.Zone;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,8 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,12 +34,15 @@ public class StationActivity extends Activity  {
         ActionBar actionBar = getActionBar();
         // Enabling Up / Back navigation
         actionBar.setDisplayHomeAsUpEnabled(true);
-        
-
-    	Spinner spinner = (Spinner) findViewById(R.id.spinnerListeProduction);
     	
     	User user = (User) this.getIntent()
         		.getSerializableExtra("user");
+    	
+    	Zone zone = (Zone) this.getIntent()
+        		.getSerializableExtra("station");
+    	
+    	this.setTitle("Station : "+ zone.toString());
+    	
     	TextView Hello = (TextView) StationActivity.this
 				.findViewById(R.id.textViewUser);
     	Hello.setText(user.getLogin());
@@ -58,4 +64,27 @@ public class StationActivity extends Activity  {
 			    s.setAdapter(spinnerArrayAdapter);
 
 	}
+    
+    @Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_station, menu);
+		
+		return super.onCreateOptionsMenu(menu);
+	}
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Take appropriate action for each action item click
+        switch (item.getItemId()) {
+        case R.id.action_info:
+
+            return true;
+        case R.id.action_settings:
+            // check for updates action
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
 }

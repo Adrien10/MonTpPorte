@@ -6,4 +6,5 @@
     <string name="action_gestiondonnees">Gestion des données</string>
     <string name="app_version">1.0</string>
     <string name="station">Station :</string>
+    <string name="action_info">Info</string>
 </resources>
