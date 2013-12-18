@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.imie.montpporte.bdd.SQLiteAdapterBase;
 import com.imie.montpporte.model.User;
 
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -146,6 +147,26 @@ public class UserSQLiteAdapter implements SQLiteAdapterBase<User> {
 				TABLE_NAME,
 				whereClause, 
 				whereArgs);
+	}
+	
+	/**
+	 * 
+	 * @param login Username to search
+	 * @return User 
+	 */
+	public User getByLogin(String login){
+
+		Cursor cursor = db.query(TABLE_NAME,
+				new String[]{COL_ID, COL_LOGIN, COL_PASSWORD}, COL_LOGIN + "=?",
+				new String[]{ login}, null,null,null);
+		User user = null;
+		
+		if(cursor != null){
+			cursor.moveToFirst();
+			user = new User(cursor.getString(1),cursor.getString(2));
+		}
+		db.close();
+		return user;
 	}
 	
 	// Internal Cursor

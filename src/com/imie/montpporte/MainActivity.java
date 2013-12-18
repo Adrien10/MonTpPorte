@@ -11,6 +11,7 @@ import com.imie.montpporte.model.Production;
 import com.imie.montpporte.model.User;
 import com.imie.montpporte.model.Zone;
 
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -20,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -29,12 +31,12 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		MonTpPorteSQLiteOpenHelper helper = new MonTpPorteSQLiteOpenHelper(
+		final MonTpPorteSQLiteOpenHelper helper = new MonTpPorteSQLiteOpenHelper(
 				this, "dbPorte", null, R.string.app_version);
 		SQLiteDatabase db = helper.getWritableDatabase() ;
 		
 		UserSQLiteAdapter usersqladapter = new UserSQLiteAdapter(db);
-		User u = new User("Adrien","pswd");
+		User u = new User("a","a");
 		usersqladapter.insert(u);
 		
 		ZoneSQLiteAdapter zonesqladapter = new ZoneSQLiteAdapter(db);
@@ -59,7 +61,33 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
+				UserSQLiteAdapter adapter = new UserSQLiteAdapter(
+						helper.getWritableDatabase());
+				
+				EditText login = (EditText) MainActivity.this.findViewById(
+						R.id.editTextLogin);
+				EditText pwd = (EditText) MainActivity.this.findViewById(
+								R.id.editTextPswd);
+				
+				String nameValue = login.getText().toString();
+				String pwdValue = pwd.getText().toString();
+				User user = adapter.getByLogin(nameValue);
+				
+				if(user.getPassword().toString().equals(pwdValue)){
+					//Display Welcome Toast
+					Toast toast = Toast.makeText(MainActivity.this, 
+							"Bienvenue "+user.getLogin().toString(),  
+							Toast.LENGTH_LONG);
+					toast.show();
+					Intent i = new Intent(MainActivity.this, StationActivity.class);
+			        startActivity(i);
+					
+				}else{
+					Toast toast = Toast.makeText(MainActivity.this, 
+							"Mauvais mot de passe",  Toast.LENGTH_LONG);
+					toast.show();
+				}
 				
 			}
 		});
@@ -97,27 +125,5 @@ public class MainActivity extends Activity {
 	        startActivity(i);
 	    }
 	    
-	    public void onClick(View v) {
-			
-			Button btn = (Button) v;
-			
-			btn.getId();
-			
-			Button button = (Button) this.findViewById(R.id.btnConnexion);
-	        
-			if (v == button) {
-				Toast tt = Toast.makeText(this, "Hello", Toast.LENGTH_LONG);
-				tt.show();
-				
-				User user = new User();
-				user.setLogin("Adrien");
-				user.setPassword("a");
-				
-				Intent intent = new Intent(this, StationActivity.class);
-				this.startActivity(intent);
-				//this.startActivityForResult(intent, 1);
-				//this.finish();
-			}
-			
-		}
+	    
 }
