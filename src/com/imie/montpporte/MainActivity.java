@@ -84,14 +84,17 @@ public class MainActivity extends Activity {
 						toast.show();
 						Intent i = new Intent(MainActivity.this, StationActivity.class);
 				        startActivity(i);
-						
+					}else{
+						Toast toast = Toast.makeText(MainActivity.this, 
+								"Mauvais mot de passe",  Toast.LENGTH_LONG);
+						toast.show();
 					}
-				}
-				else{
+				}else{
 					Toast toast = Toast.makeText(MainActivity.this, 
-							"Mauvais mot de passe",  Toast.LENGTH_LONG);
+							"Données non valides",  Toast.LENGTH_LONG);
 					toast.show();
 				}
+				
 				
 			}
 		});

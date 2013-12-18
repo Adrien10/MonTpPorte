@@ -156,16 +156,17 @@ public class UserSQLiteAdapter implements SQLiteAdapterBase<User> {
 	 */
 	public User getByLogin(String login){
 
-		Cursor cursor = db.query(TABLE_NAME,
-				new String[]{COL_ID, COL_LOGIN, COL_PASSWORD}, COL_LOGIN + "=?",
-				new String[]{ login}, null,null,null);
-		User user = null;
+		String whereClause =  COL_LOGIN + "=? ";
+		String[] whereArgs = new String[] {String.valueOf(login) };
 		
-		if(cursor != null){
+		Cursor cursor = this.db.query(
+				TABLE_NAME, COLS, whereClause, whereArgs, null, null, null);
+
+		User user = null;
+		if(cursor.getCount() > 0){
 			cursor.moveToFirst();
 			user = new User(cursor.getString(1),cursor.getString(2));
 		}
-		db.close();
 		return user;
 	}
 	
