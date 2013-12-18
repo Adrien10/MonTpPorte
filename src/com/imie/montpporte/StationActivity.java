@@ -18,5 +18,4 @@ public class StationActivity extends Activity  {
         actionBar.setDisplayHomeAsUpEnabled(true);
        
 	}
-
 }
