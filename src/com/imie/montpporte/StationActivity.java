@@ -7,19 +7,26 @@ import java.util.ArrayList;
 
 import com.imie.montpporte.bdd.MonTpPorteSQLiteOpenHelper;
 import com.imie.montpporte.data.ProductionSQLiteAdapter;
+import com.imie.montpporte.data.UserSQLiteAdapter;
 import com.imie.montpporte.model.Production;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class StationActivity extends Activity  {
 	
@@ -27,25 +34,21 @@ public class StationActivity extends Activity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_station);
-        //this.setResult(RESULT_CANCELED); 
         
-
+     // Activation du retour par l'action bar
         ActionBar actionBar = getActionBar();
-        // Enabling Up / Back navigation
         actionBar.setDisplayHomeAsUpEnabled(true);
     	
-    	Zone zone = (Zone) this.getIntent()
-        		.getSerializableExtra("station");
-    	
+     // Mise à jour du titre de l'activity
+    	Zone zone = (Zone) this.getIntent().getSerializableExtra("station");
     	this.setTitle("Station : "+ zone.toString());
-    	
-    	
-
-        MonTpPorteSQLiteOpenHelper helper = new 
+     // Connexion à la bdd
+    	MonTpPorteSQLiteOpenHelper helper = new 
 				MonTpPorteSQLiteOpenHelper(this, "dbPorte",
 						null, R.string.app_version);
-        
         SQLiteDatabase db = helper.getDb();
+        
+     // Initialisation du spinner des lignes de production
         ProductionSQLiteAdapter productionesqladapter =
 				new ProductionSQLiteAdapter(db); 
 
@@ -56,7 +59,18 @@ public class StationActivity extends Activity  {
 						android.R.layout.simple_spinner_dropdown_item,
 						productions);
 			    s.setAdapter(spinnerArrayAdapter);
-
+		
+	    // Evenement sur le click du btn démarrer
+	    Button btnStart = (Button) this.findViewById(R.id.btnStart);        
+	    btnStart.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Button bstart = (Button) v.findViewById(R.id.btnStart);
+				bstart.setEnabled(false);
+				//Button bstop = (Button) v.findViewById(R.id.btnStop);
+				//bstop.setEnabled(true);
+			}
+		});
 	}
     
     @Override
@@ -72,6 +86,7 @@ public class StationActivity extends Activity  {
         // Take appropriate action for each action item click
         switch (item.getItemId()) {
         case R.id.action_info:
+        	// Appele la dialog qui détail l'utilisateur connecté
         	displayDialog();
             return true;
         default:

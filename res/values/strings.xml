@@ -5,6 +5,8 @@
     <string name="action_settings">Settings</string>
     <string name="action_gestiondonnees">Gestion des données</string>
     <string name="app_version">1.0</string>
-    <string name="station">Station :</string>
+    <string name="station">Station : </string>
     <string name="action_info">Info</string>
+    <string name="station_btndemarrer">Démarrer</string>
+    <string name="sation_btnterminer">Terminer</string>
 </resources>
