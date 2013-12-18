@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 		ZoneSQLiteAdapter zonesqladapter = new ZoneSQLiteAdapter(db);
 		ArrayList<Zone>  zones = zonesqladapter.getAll();
 		
-		Spinner s = (Spinner) this.findViewById(R.id.spinnerStations);
+		final Spinner s = (Spinner) this.findViewById(R.id.spinnerStations);
 		ArrayAdapter<Zone> spinnerArrayAdapter = new ArrayAdapter<Zone>(this,
 			        android.R.layout.simple_spinner_dropdown_item,zones);
 			    s.setAdapter(spinnerArrayAdapter);
