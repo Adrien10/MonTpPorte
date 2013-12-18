@@ -3,6 +3,7 @@ package com.imie.montpporte.data;
 import java.util.ArrayList;
 
 import com.imie.montpporte.bdd.SQLiteAdapterBase;
+import com.imie.montpporte.model.Commande;
 import com.imie.montpporte.model.Production;
 import com.imie.montpporte.model.User;
 
@@ -56,7 +57,7 @@ private static final String TAG = "ProductionDBAdapter";
 		result.put(	COL_ID, String.valueOf(production.getId()) 
 					);				
 		result.put(	COL_ID_COMMANDE,
-					String.valueOf(production.getCommade() )
+					String.valueOf(production.getCommande() )
 					);				
 		result.put(	COL_NORDRE,	
 					String.valueOf(production.getNOrdre()) 
@@ -72,7 +73,7 @@ private static final String TAG = "ProductionDBAdapter";
 			result = new Production();			
 
 			result.setId(c.getInt( c.getColumnIndexOrThrow(COL_ID) ));
-			result.setCommade( c.getInt(
+			result.setCommande( c.getInt(
 					c.getColumnIndexOrThrow(COL_ID_COMMANDE))); 
 			result.setNOrdre(
 					c.getInt(c.getColumnIndexOrThrow(COL_NORDRE)));
@@ -179,7 +180,28 @@ private static final String TAG = "ProductionDBAdapter";
 
 	@Override
 	public ArrayList<Production> getAll() {
-		return null;
+
+		ArrayList<Production> productions = new ArrayList<Production>();
+		
+    	Cursor cursor = db.query(TABLE_NAME, 
+        		COLS, null,
+                null, null, null, null, null);
+ 
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+            	Production production = new Production();
+            	production.setId(Integer.parseInt(cursor.getString(0)));
+            	production.setCommande(Integer.parseInt(cursor.getString(1)));
+            	production.setNOrdre(Integer.parseInt(cursor.getString(2)));
+                // Adding user to list
+            	productions.add(production);
+            } while (cursor.moveToNext());
+        }
+ 
+        // return production list
+        return productions;
+
 	}
 
 	/*@Override

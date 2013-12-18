@@ -215,7 +215,7 @@ private static final String TAG = "CommandeDBAdapter";
  
         // return commande list
         return commandes;
-			}
+	}
 
 	/*@Override
 	public Cursor cursorToItems(Cursor c) {

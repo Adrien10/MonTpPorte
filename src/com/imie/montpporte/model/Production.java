@@ -23,11 +23,11 @@ public class Production {
 		this.id = id;
 	}
 
-	public int getCommade() {
+	public int getCommande() {
 		return commande;
 	}
 
-	public void setCommade(int commande) {
+	public void setCommande(int commande) {
 		this.commande = commande;
 	}
 
