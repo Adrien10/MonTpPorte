@@ -17,14 +17,16 @@ public class Zone implements Serializable{
 	protected String nom;
 	protected int quantite_tampon;
 	protected int etat;
+	protected int station_destination;
 	
 	public Zone() {
 	}
 	
-	public Zone(String nom, int quantite_tampon) {
+	public Zone(String nom, int quantite_tampon,int stationdestination) {
 		this.nom = nom;
 		this.quantite_tampon = quantite_tampon;
-		this.etat=0;
+		this.etat = 0;
+		this.station_destination = stationdestination;
 	}
 
 	@Override
@@ -63,6 +65,14 @@ public class Zone implements Serializable{
 
 	public void setEtat(int etat) {
 		this.etat = etat;
+	}
+
+	public int getStation_destination() {
+		return station_destination;
+	}
+
+	public void setStation_destination(int station_destination) {
+		this.station_destination = station_destination;
 	}
 	
 

@@ -3,13 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <Spinner
-        android:id="@+id/spinnerListeProduction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" />
-
     <EditText
         android:id="@+id/editTextDetailProduction"
         android:layout_width="wrap_content"
@@ -19,10 +12,22 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/btnStart"
         android:layout_marginTop="22dp"
+        android:enabled="false"
         android:ems="10" >
 
         <requestFocus />
     </EditText>
+
+    <Button
+        android:id="@+id/btnStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnStart"
+        android:layout_alignBottom="@+id/btnStart"
+        android:layout_marginLeft="44dp"
+        android:layout_toRightOf="@+id/btnStart"
+        android:enabled="false"
+        android:text="@string/sation_btnterminer" />
 
     <Button
         android:id="@+id/btnStart"
@@ -30,18 +35,32 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/spinnerListeProduction"
-        android:layout_marginLeft="34dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="16dp"
         android:text="@string/station_btndemarrer" />
 
-    <Button
-        android:id="@+id/btnStop"
+    <TextView
+        android:id="@+id/textViewChoixLigneProd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/editTextDetailProduction"
-        android:layout_marginLeft="22dp"
-        android:layout_toRightOf="@+id/btnStart"
-        android:enabled="false"
-        android:text="@string/sation_btnterminer" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textViewChoixLigneProd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Choisir la ligne de production :" />
+
+    <Spinner
+        android:id="@+id/spinnerListeProduction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewChoixLigneProd" />
 
 </RelativeLayout>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.imie.montpporte.bdd.SQLiteAdapterBase;
 import com.imie.montpporte.model.Production;
+import com.imie.montpporte.model.Zone;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -21,12 +22,14 @@ private static final String TAG = "ProductionDBAdapter";
 	public static final String COL_ID = "id";
 	public static final String COL_ID_COMMANDE = "commande";
 	public static final String COL_NORDRE = "nOrdre";
+	public static final String COL_STATION_COURANTE = "station_courante";
 	
 	/** Global Fields */
 	public static final String[] COLS = new String[] {
 		COL_ID,
 		COL_ID_COMMANDE,
-		COL_NORDRE
+		COL_NORDRE,
+		COL_STATION_COURANTE
 	};
 	
 	public String getTableName(){
@@ -42,7 +45,8 @@ private static final String TAG = "ProductionDBAdapter";
 		+ TABLE_NAME	+ " ("
 		+ COL_ID	+ " integer PRIMARY KEY AUTOINCREMENT,"
 		+ COL_ID_COMMANDE	+ " string ,"
-		+ COL_NORDRE	+ " string "
+		+ COL_NORDRE	+ " integer ,"
+		+ COL_STATION_COURANTE	+ " integer "
 		+ ");";
 	}
 	
@@ -60,8 +64,11 @@ private static final String TAG = "ProductionDBAdapter";
 					String.valueOf(production.getCommande() )
 					);				
 		result.put(	COL_NORDRE,	
-					String.valueOf(production.getNOrdre()) 
-					);			
+					String.valueOf(production.getnOrdre()) 
+					);
+		result.put(	COL_STATION_COURANTE,	
+				String.valueOf(production.getStationCourante()) 
+				);		
 
 		return result;
 	}
@@ -75,8 +82,10 @@ private static final String TAG = "ProductionDBAdapter";
 			result.setId(c.getInt( c.getColumnIndexOrThrow(COL_ID) ));
 			result.setCommande( c.getInt(
 					c.getColumnIndexOrThrow(COL_ID_COMMANDE))); 
-			result.setNOrdre(
+			result.setnOrdre(
 					c.getInt(c.getColumnIndexOrThrow(COL_NORDRE)));
+			result.setStationCourante(
+					c.getInt(c.getColumnIndexOrThrow(COL_STATION_COURANTE)));
 		}
 		
 		return result;
@@ -193,7 +202,36 @@ private static final String TAG = "ProductionDBAdapter";
             	Production production = new Production();
             	production.setId(Integer.parseInt(cursor.getString(0)));
             	production.setCommande(Integer.parseInt(cursor.getString(1)));
-            	production.setNOrdre(Integer.parseInt(cursor.getString(2)));
+            	production.setnOrdre(Integer.parseInt(cursor.getString(2)));
+            	production.setStationCourante(Integer.parseInt(cursor.getString(3)));
+                // Adding user to list
+            	productions.add(production);
+            } while (cursor.moveToNext());
+        }
+ 
+        // return production list
+        return productions;
+
+	}
+	
+	public ArrayList<Production> getAllFromZone(Zone zone) {
+
+		ArrayList<Production> productions = new ArrayList<Production>();
+		String whereClause =  COL_STATION_COURANTE + "=? ";
+		String[] whereArgs = new String[] {String.valueOf(zone.getId()) };
+		
+		Cursor cursor = db.query(TABLE_NAME, 
+        		COLS, whereClause,
+        		whereArgs, null, null, null, null);
+ 
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+            	Production production = new Production();
+            	production.setId(Integer.parseInt(cursor.getString(0)));
+            	production.setCommande(Integer.parseInt(cursor.getString(1)));
+            	production.setnOrdre(Integer.parseInt(cursor.getString(2)));
+            	production.setStationCourante(Integer.parseInt(cursor.getString(3)));
                 // Adding user to list
             	productions.add(production);
             } while (cursor.moveToNext());

@@ -1,43 +1,51 @@
 package com.imie.montpporte.data;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.imie.montpporte.bdd.SQLiteAdapterBase;
+import com.imie.montpporte.model.LogProd;
 import com.imie.montpporte.model.Zone;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.SimpleAdapter;
 
 /**
- * Class ZoneSQLiteAdapter implements SQLiteAdapterBase <br/>
- * Permet la liaison base de données avec l'objet Zone
+ * Class LogProdSQLiteAdapter implements SQLiteAdapterBase <br/>
+ * Permet la liaison base de données avec l'objet LogProd
  * @author Adrien C.
  */
-public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
+public class LogProdSQLiteAdapter implements SQLiteAdapterBase<LogProd> {
 /** Global Fields */
 	public SQLiteDatabase db;
-	private static final String TAG = "ZoneDBAdapter";
-	public static final String TABLE_NAME = "Zone";
+	private static final String TAG = "LogDBAdapter";
+	public static final String TABLE_NAME = "Log";
 	
 	// Columns constants fields mapping
 	public static final String COL_ID = "id";
-	public static final String COL_NOM = "nom";
-	public static final String COL_QUANTITE_TAMPON = "quantite_tampon";
-	public static final String COL_ETAT = "etat";
-	public static final String COL_STATOIN_DEST = "station_destination";
+	public static final String COL_MOMENT = "moment";
+	public static final String COL_DATE = "date";
+	public static final String COL_LGNE_PROD= "ligne_production";
+	public static final String COL_USER = "user";
+	public static final String COL_STATOIN = "station";
 	
 	public static final String[] COLS = new String[] {
 		COL_ID,
-		COL_NOM,
-		COL_QUANTITE_TAMPON,
-		COL_ETAT,
-		COL_STATOIN_DEST
+		COL_MOMENT,
+		COL_DATE,
+		COL_LGNE_PROD,
+		COL_USER,
+		COL_STATOIN
 	};
 	
+	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	
 	/** Constructors */
-	public ZoneSQLiteAdapter(SQLiteDatabase db) {
+	public LogProdSQLiteAdapter(SQLiteDatabase db) {
 		 this.db = db;
 	}
 
@@ -65,46 +73,53 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 		return "CREATE TABLE "
 		+ TABLE_NAME	+ " ("
 		+ COL_ID	+ " integer PRIMARY KEY AUTOINCREMENT,"
-		+ COL_NOM	+ " string ,"
-		+ COL_QUANTITE_TAMPON	+ " integer ,"
-		+ COL_ETAT	+ " integer ,"
-		+ COL_STATOIN_DEST + " integer "
+		+ COL_MOMENT	+ " string ,"
+		+ COL_DATE	+ " datetime ,"
+		+ COL_LGNE_PROD	+ " integer ,"
+		+ COL_USER + " integer ,"
+		+COL_STATOIN + " integer ,"
 		+ ");";
 	}
 
-	public static ContentValues zoneToContentValues(Zone zone) {		
+	public static ContentValues zoneToContentValues(LogProd log) {		
 		ContentValues result = new ContentValues();		
-		result.put(	COL_ID, String.valueOf(zone.getId()) 
+		result.put(	COL_ID, String.valueOf(log.getId()) 
 					);				
-		result.put(	COL_NOM, String.valueOf(zone.getNom()) 
+		result.put(	COL_MOMENT, String.valueOf(log.getMoment()) 
 					);				
-		result.put(	COL_QUANTITE_TAMPON,	
-					String.valueOf(zone.getQuantite_tampon()) 
+		result.put(	COL_DATE,	
+					String.valueOf(log.getDate()) 
 					);
-		result.put(	COL_ETAT,	
-				String.valueOf(zone.getEtat()) 
+		result.put(	COL_LGNE_PROD,	
+				String.valueOf(log.getLigneproduction()) 
 				);
-		result.put(	COL_STATOIN_DEST,	
-				String.valueOf(zone.getStation_destination()) 
+		result.put(	COL_USER,	
+				String.valueOf(log.getUser()) 
 				);	
+		result.put(	COL_STATOIN,	
+				String.valueOf(log.getZone()) 
+				);	
+		
 
 		return result;
 	}
 	
-	public Zone cursorToItem(Cursor c) {
-		Zone result = null;
+	public LogProd cursorToItem(Cursor c) {
+		LogProd result = null;
 
 		if (c.getCount() != 0) {
-			result = new Zone();			
+			result = new LogProd();			
 
 			result.setId(c.getInt( c.getColumnIndexOrThrow(COL_ID) ));
-			result.setNom(c.getString( c.getColumnIndexOrThrow(COL_NOM) )); 
-			result.setQuantite_tampon(
-					c.getInt(c.getColumnIndexOrThrow(COL_QUANTITE_TAMPON) ));
-			result.setQuantite_tampon(
-					c.getInt(c.getColumnIndexOrThrow(COL_ETAT) ));
-			result.setStation_destination(
-					c.getInt(c.getColumnIndexOrThrow(COL_STATOIN_DEST) ));
+			result.setMoment(c.getString( c.getColumnIndexOrThrow(COL_MOMENT) )); 
+			result.setDate(
+					c.getString(df.parse(c.getColumnIndexOrThrow(COL_DATE) )));
+			result.setZone(
+					c.getInt(c.getColumnIndexOrThrow(COL_STATOIN) ));
+			result.setUser(
+					c.getInt(c.getColumnIndexOrThrow(COL_USER) ));
+			result.setLigneproduction(
+					c.getInt(c.getColumnIndexOrThrow(COL_LGNE_PROD) ));
 		}
 		
 		return result;
@@ -116,20 +131,20 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 	 * @param id id of entity
 	 * @return instance of user
 	 */
-	public Zone getByID(int id) {
+	public LogProd getByID(int id) {
 		Cursor c = this.getSingleCursor(id);
 		if(c.getCount()!=0)
 			c.moveToFirst();
-		Zone result = this.cursorToItem(c);
+		LogProd result = this.cursorToItem(c);
 		c.close();
 		
 		return result;
 	}
 
-	public long insert(Zone item) {
+	public long insert(LogProd item) {
 		Log.d(TAG, "Insert DB(" + TABLE_NAME + ")");
 		
-		ContentValues values = ZoneSQLiteAdapter.zoneToContentValues(item);
+		ContentValues values = LogProdSQLiteAdapter.zoneToContentValues(item);
 		values.remove(COL_ID);
 	
 		if(values.size()!=0){
@@ -141,10 +156,10 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 		}
 	}
 	@Override
-	public int update(Zone item) {
+	public int update(LogProd item) {
 		Log.d(TAG, "Update DB(" + TABLE_NAME + ")");
 		
-		ContentValues values = ZoneSQLiteAdapter.zoneToContentValues(item);	
+		ContentValues values = LogProdSQLiteAdapter.zoneToContentValues(item);	
 		String whereClause =  COL_ID + "=? ";
 		String[] whereArgs = new String[] {String.valueOf(item.getId()) };
 		
@@ -199,7 +214,7 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 	}
 
 	@Override
-	public int delete(Zone item) {
+	public int delete(LogProd item) {
 		return this.db.delete(
 				TABLE_NAME,
 				COL_ID+" = ?",
@@ -207,8 +222,8 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 	}
 
 	@Override
-	public ArrayList<Zone> getAll() {
-		ArrayList<Zone> zones = new ArrayList<Zone>();
+	public ArrayList<LogProd> getAll() {
+		ArrayList<LogProd> logs = new ArrayList<LogProd>();
 		
     	Cursor cursor = db.query(TABLE_NAME, 
         		 COLS, null,
@@ -217,19 +232,20 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-            	Zone zone = new Zone();
-            	zone.setId(Integer.parseInt(cursor.getString(0)));
-            	zone.setNom(cursor.getString(1));
-            	zone.setQuantite_tampon(Integer.parseInt(cursor.getString(2)));
-            	zone.setEtat(Integer.parseInt(cursor.getString(3)));
-            	zone.setStation_destination(Integer.parseInt(cursor.getString(4)));
+            	LogProd log = new LogProd();
+            	log.setId(Integer.parseInt(cursor.getString(0)));
+            	log.setMoment(cursor.getString(1));
+            	log.setDate((Date)df.parse(cursor.getString(2)));
+            	log.setLigneproduction(Integer.parseInt(cursor.getString(3)));
+            	log.setUser(Integer.parseInt(cursor.getString(4)));
+            	log.setZone(Integer.parseInt(cursor.getString(4)));
                 // Adding zone to list
-            	zones.add(zone);
+            	logs.add(log);
             } while (cursor.moveToNext());
         }
  
         // return zones list
-        return zones;
+        return logs;
 	}
 
 	/*@Override

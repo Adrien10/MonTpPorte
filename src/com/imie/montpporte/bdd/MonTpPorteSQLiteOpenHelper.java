@@ -31,13 +31,17 @@ public class MonTpPorteSQLiteOpenHelper extends SQLiteOpenHelper{
 		
 		UserSQLiteAdapter usersqladapter = new UserSQLiteAdapter(db);
 		User u = new User("a","a");
+		User u2 = new User("admin","admin");
+		User u3 = new User("Adrien","");
 		usersqladapter.insert(u);
+		usersqladapter.insert(u2);
+		usersqladapter.insert(u3);
 		
 		ZoneSQLiteAdapter zonesqladapter = new ZoneSQLiteAdapter(db);
-		Zone zone = new Zone("Découpage",10);
-		Zone zone2 = new Zone("Façonnage",10);
-		Zone zone3 = new Zone("Peinture",10);
-		Zone zone4 = new Zone("Assemblage",10);
+		Zone zone = new Zone("Découpage",10,2);
+		Zone zone2 = new Zone("Façonnage",10,3);
+		Zone zone3 = new Zone("Peinture",10,4);
+		Zone zone4 = new Zone("Assemblage",10,5);
 		zonesqladapter.insert(zone);
 		zonesqladapter.insert(zone2);
 		zonesqladapter.insert(zone3);
@@ -46,16 +50,17 @@ public class MonTpPorteSQLiteOpenHelper extends SQLiteOpenHelper{
 		
 		CommandeSQLiteAdapter cdesqladapter = new CommandeSQLiteAdapter(db);
 		Commande cde = new Commande(2,"Porte","Acier",1);
+		Commande cde2 = new Commande(2,"Porte","Bois",2);
+		Commande cde3 = new Commande(2,"Porte","Fer",3);
+		Commande cde4 = new Commande(2,"Porte","Acier",1);
+		Commande cde5 = new Commande(2,"Porte","Bois",5);
+		Commande cde6 = new Commande(2,"Porte","Fer",69);
 		cdesqladapter.insert(cde);
-		
-		ProductionSQLiteAdapter productionesqladapter =
-				new ProductionSQLiteAdapter(db);
-		int i = 1;
-		while ( i <= cde.getQuantite()){
-		Production production = new Production(cde, i);
-		productionesqladapter.insert(production);
-		i++;
-		}
+		cdesqladapter.insert(cde2);
+		cdesqladapter.insert(cde3);
+		cdesqladapter.insert(cde4);
+		cdesqladapter.insert(cde5);
+		cdesqladapter.insert(cde6);
 		
 	}
 
