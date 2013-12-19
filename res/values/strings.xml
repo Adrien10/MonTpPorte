@@ -9,12 +9,27 @@
     <string name="action_info">Info</string>
     <string name="station_btndemarrer">DÃ©marrer</string>
     <string name="sation_btnterminer">Terminer</string>
+    <string name="ok">OK</string>
+
     <string-array name="action_array">
         <item>Utilisateur</item>
         <item>Commande</item>
         <item>Station</item>
     </string-array>
+
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-<string name="action_websearch">Close navigation drawer</string> 
+    <string name="action_websearch">Close navigation drawer</string>
+    <string name="connexion_login">Saisir identifiant</string>
+    <string name="connexion_pwd">Saisir mot de passe</string>
+    <string name="spinner_main">Choisir votre station</string>
+    <string name="adduser">Ajouter utilisateur</string>
+    <string name="addstation">Ajouter une station</string>
+    <string name="addcommand">Ajouter une commande</string>
+    <string name="title_activity_gestion_user">Gestion utilisateurs</string>
+    <string name="hello_world">Hello world!</string>
+     
+    <string name="title_activity_gestion_command">Gestion des commandes</string>
+    <string name="title_activity_gestion_station">Gestion des stationsy</string>
+
 </resources>

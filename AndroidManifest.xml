@@ -13,7 +13,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        !-- Main activity -->
+        !-- Main activity -->
         <activity
             android:name="com.imie.montpporte.MainActivity"
             android:label="@string/app_name" >
@@ -23,17 +23,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        !-- Gestion donnees activity -->
+        !-- Gestion donnees activity -->
         <activity
             android:name="com.imie.montpporte.GestionDonneesActivity"
             android:label="@string/action_gestiondonnees"
             android:parentActivityName="com.imie.montpporte.MainActivity" >
         </activity>
-        !-- Station activity -->
+        !-- Station activity -->
         <activity
             android:name="com.imie.montpporte.StationActivity"
             android:label="@string/station"
             android:parentActivityName="com.imie.montpporte.MainActivity" >
+        </activity>
+        <activity
+            android:name="com.imie.montpporte.GestionUserActivity"
+            android:label="@string/title_activity_gestion_user" >
+        </activity>
+        <activity
+            android:name="com.imie.montpporte.GestionCommandActivity"
+            android:label="@string/title_activity_gestion_command" >
+        </activity>
+        <activity
+            android:name="com.imie.montpporte.GestionStationActivity"
+            android:label="@string/title_activity_gestion_station" >
         </activity>
     </application>
 

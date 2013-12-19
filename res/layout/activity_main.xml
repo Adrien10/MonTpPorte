@@ -8,40 +8,70 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextLogin"
+        android:layout_below="@+id/spinnerStations"
+        android:layout_marginTop="18dp"
+        android:text="Saisir login :"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/btnConnexion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_below="@+id/editTextPswd"
+        android:layout_marginRight="21dp"
+        android:layout_marginTop="20dp"
+        android:text="Connexion" />
+
     <EditText
         android:id="@+id/editTextLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="117dp"
+        android:layout_marginTop="20dp"
         android:ems="10" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextPswd"
+        android:layout_centerVertical="true"
+        android:text="Saisir mot de passe :"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/editTextPswd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editTextLogin"
-        android:layout_alignRight="@+id/editTextLogin"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="17dp"
         android:ems="10"
         android:inputType="textPassword" />
-
-    <Button
-        android:id="@+id/btnConnexion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextPswd"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="73dp"
-        android:text="Connexion" />
 
     <Spinner
         android:id="@+id/spinnerStations"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/spinnerStations"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/spinner_main"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

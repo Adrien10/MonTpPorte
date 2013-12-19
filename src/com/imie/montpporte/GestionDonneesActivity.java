@@ -1,10 +1,13 @@
 package com.imie.montpporte;
 
 
+import com.imie.montpporte.R.layout;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -45,12 +48,21 @@ public class GestionDonneesActivity extends Activity {
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the sliding drawer and the action bar app icon
        
-        if (savedInstanceState == null) {
-            selectItem(0);
-        }
+//        if (savedInstanceState != null) {
+//        	int position = savedInstanceState.getInt("");
+//        	if (position != 0)
+//        		selectItem(position);
+//        }
     }
 
+	    
     @Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+	}
+
+
+	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_slide, menu);
@@ -68,15 +80,29 @@ public class GestionDonneesActivity extends Activity {
     }
 
     private void selectItem(int position) {
-        // update the main content by replacing fragments
-        Fragment fragment = new actionFragment();
-        Bundle args = new Bundle();
-        args.putInt(actionFragment.ARG_PLANET_NUMBER, position);
-        fragment.setArguments(args);
-
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame,
-        		fragment).commit();
+        // update the main content by replacing intent
+    	 //Switch activity 
+    	Intent intent = new Intent();
+        switch(position) {
+        case 0:
+        	intent.setClass(this,
+        			GestionUserActivity.class);
+            break;
+        case 1:
+        	intent.setClass(this, 
+        			GestionCommandActivity.class);
+            break;
+        case 2:
+        	intent.setClass(this, 
+        			GestionStationActivity.class);
+            break;
+            
+        default:
+        	intent.setClass(this, 
+        			GestionDonneesActivity.class);
+        }
+        
+        this.startActivity(intent);
 
         // update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);
@@ -93,41 +119,4 @@ public class GestionDonneesActivity extends Activity {
         getActionBar().setTitle(mTitle);
     }
 
- 
-
-   
-
-    /**
-     * Fragment that appears in the "content_frame", shows a planet
-     */
-    public static class actionFragment extends Fragment {
-        public static final String ARG_PLANET_NUMBER = "planet_number";
-
-        public actionFragment() {
-            // Empty constructor required for fragment subclasses
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_action,
-            		container, false);
-            int i = getArguments().getInt(ARG_PLANET_NUMBER);
-            String action = getResources().getStringArray(R.array.action_array)[i];
-//
-//            int imageId = getResources().getIdentifier(action.toLowerCase(Locale.getDefault()),
-//                            "drawable", getActivity().getPackageName());
-//            ((ImageView) rootView.findViewById(R.id.image)).setImageResource(imageId);
-            getActivity().setTitle(action);
-//            switch(i) {
-//            case 1:
-//               
-//                
-//            default:
-//                return super.onOptionsItemSelected(item);
-//            }
-            return rootView;
-        }
-    }
-        
 }

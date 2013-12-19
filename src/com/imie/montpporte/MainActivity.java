@@ -119,7 +119,7 @@ public class MainActivity extends Activity {
 	     * */
 	    private void GestionDonnees() {
 	        Intent i = new Intent(MainActivity.this,
-	        		GestionDonneesActivity.class);
+	        		GestionUserActivity.class);
 	        startActivity(i);
 	    }
 	    
