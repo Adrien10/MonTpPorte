@@ -7,14 +7,13 @@ import java.util.ArrayList;
 
 import com.imie.montpporte.bdd.MonTpPorteSQLiteOpenHelper;
 import com.imie.montpporte.data.ProductionSQLiteAdapter;
-import com.imie.montpporte.data.UserSQLiteAdapter;
+import com.imie.montpporte.data.ZoneSQLiteAdapter;
 import com.imie.montpporte.model.Production;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,10 +22,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class StationActivity extends Activity  {
 	
@@ -40,7 +37,7 @@ public class StationActivity extends Activity  {
         actionBar.setDisplayHomeAsUpEnabled(true);
     	
      // Mise à jour du titre de l'activity
-    	Zone zone = (Zone) this.getIntent().getSerializableExtra("station");
+    	final Zone zone = (Zone) this.getIntent().getSerializableExtra("station");
     	this.setTitle("Station : "+ zone.toString());
      // Connexion à la bdd
     	MonTpPorteSQLiteOpenHelper helper = new 
@@ -49,26 +46,54 @@ public class StationActivity extends Activity  {
         SQLiteDatabase db = helper.getDb();
         
      // Initialisation du spinner des lignes de production
-        ProductionSQLiteAdapter productionesqladapter =
-				new ProductionSQLiteAdapter(db); 
+        final ProductionSQLiteAdapter productionesqladapter =
+				new ProductionSQLiteAdapter(db);
 
-        ArrayList<Production> productions = productionesqladapter.getAll();
-    	Spinner s = (Spinner) this.findViewById(R.id.spinnerListeProduction);
-		ArrayAdapter<Production> spinnerArrayAdapter = 
+        final ArrayList<Production> productions = 
+        		productionesqladapter.getAllFromZone(zone);
+    	final Spinner spinnerProduction = (Spinner) this.findViewById(
+    			R.id.spinnerListeProduction);
+		final ArrayAdapter<Production> spinnerArrayAdapter = 
 				new ArrayAdapter<Production>(this,
 						android.R.layout.simple_spinner_dropdown_item,
 						productions);
-			    s.setAdapter(spinnerArrayAdapter);
+		spinnerProduction.setAdapter(spinnerArrayAdapter);
 		
-	    // Evenement sur le click du btn démarrer
-	    Button btnStart = (Button) this.findViewById(R.id.btnStart);        
+	  // Recupération des objects
+	    final Button btnStart = (Button) this.findViewById(R.id.btnStart); 
+	    final Button btnStop = (Button) this.findViewById(R.id.btnStop);
+	    
+	  // Evènements 
 	    btnStart.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Button bstart = (Button) v.findViewById(R.id.btnStart);
-				bstart.setEnabled(false);
-				//Button bstop = (Button) v.findViewById(R.id.btnStop);
-				//bstop.setEnabled(true);
+				btnStart.setEnabled(false);
+				btnStop.setEnabled(true);
+				spinnerProduction.setEnabled(false);
+				// TODO Log de début de production
+				
+			}
+		});
+	    btnStop.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final Production ligneproduction = (Production) 
+			    		spinnerProduction.getSelectedItem();
+				
+				btnStart.setEnabled(true);
+				btnStop.setEnabled(false);
+				spinnerProduction.setEnabled(true);
+				
+				// TODO Log de fin de production
+				productions.remove(ligneproduction);
+				spinnerArrayAdapter.remove(ligneproduction);
+				
+				ligneproduction.setStationCourante(
+						zone.getStation_destination());
+				productionesqladapter.update(ligneproduction);
+				
+				spinnerArrayAdapter.notifyDataSetChanged();
+				
 			}
 		});
 	}
@@ -94,9 +119,6 @@ public class StationActivity extends Activity  {
         }
     }
     
-    /**
-     * Function to display information in a dialog box about the user
-     */
     public void displayDialog(){
 
     	User user = (User) this.getIntent()

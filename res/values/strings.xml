@@ -7,7 +7,7 @@
     <string name="app_version">1.0</string>
     <string name="station">Station : </string>
     <string name="action_info">Info</string>
-    <string name="station_btndemarrer">DÃ©marrer</string>
+    <string name="station_btndemarrer">Démarrer</string>
     <string name="sation_btnterminer">Terminer</string>
     <string name="ok">OK</string>
     <string name="delete">Supprimer</string>
