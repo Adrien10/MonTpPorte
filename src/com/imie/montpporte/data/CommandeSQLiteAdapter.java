@@ -33,14 +33,26 @@ private static final String TAG = "CommandeDBAdapter";
 		COL_ID_CLIENT
 	};
 	
+	/**
+	 * get the name of table sql
+	 * @return string
+	 */
 	public String getTableName(){
 		return TABLE_NAME;
 	}
 	
+	/**
+	 * get all column of the table sql
+	 * @return String array
+	 */
 	public String[] getCols(){
 		return COLS;
 	}
-
+	
+	/**
+	 * Get base schema 
+	 * @return string
+	 */
 	public static final String getSchema() {
 		return "CREATE TABLE "
 		+ TABLE_NAME	+ " ("
@@ -52,6 +64,10 @@ private static final String TAG = "CommandeDBAdapter";
 		+ ");";
 	}
 	
+	/**
+	 * get db instance
+	 * @param db
+	 */
 	public CommandeSQLiteAdapter(SQLiteDatabase db) {
 		 this.db = db;
 	}
@@ -111,6 +127,9 @@ private static final String TAG = "CommandeDBAdapter";
 		return result;
 	}
 
+	/**
+	 * Insert an order
+	 */
 	public long insert(Commande item) {
 		Log.d(TAG, "Insert DB(" + TABLE_NAME + ")");
 		
@@ -175,7 +194,11 @@ private static final String TAG = "CommandeDBAdapter";
 				null);
 	}
 	
-	
+	/**
+	 * Delete order which id = id parameter
+	 * @param id
+	 * @return 
+	 */
 	public int delete(int id){
 		return this.db.delete(
 				TABLE_NAME,
@@ -190,7 +213,10 @@ private static final String TAG = "CommandeDBAdapter";
 				COL_ID+" = ?",
 				new String[]{String.valueOf(item.getId())});
 	}
-
+	
+	/**
+	 * get all order in base sql
+	 */
 	@Override
 	public ArrayList<Commande> getAll() {
 		ArrayList<Commande> commandes = new ArrayList<Commande>();

@@ -219,6 +219,8 @@ public class UserSQLiteAdapter implements SQLiteAdapterBase<User> {
 
 	@Override
 	public ArrayList<User> getAll() {
+		
+		
 		ArrayList<User> users = new ArrayList<User>();
 		
     	Cursor cursor = db.query(TABLE_NAME, 
