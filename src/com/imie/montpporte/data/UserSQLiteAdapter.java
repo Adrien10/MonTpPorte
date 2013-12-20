@@ -164,7 +164,7 @@ public class UserSQLiteAdapter implements SQLiteAdapterBase<User> {
 		User user = null;
 		if(cursor.getCount() > 0){
 			cursor.moveToFirst();
-			user = new User(cursor.getString(1),cursor.getString(2));
+			user = new User(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2));
 		}
 		return user;
 	}

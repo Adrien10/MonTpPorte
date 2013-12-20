@@ -20,7 +20,11 @@ public class User implements Serializable{
 	
 	public User() {
 	}
-	
+	public User(int id, String login, String pswd) {
+		this.id 		= id;
+		this.login 		= login;
+		this.password 	= pswd;
+	}
 	public User(String login, String pswd) {
 		this.login 		= login;
 		this.password 	= pswd;

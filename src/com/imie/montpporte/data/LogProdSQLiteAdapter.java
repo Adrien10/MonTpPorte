@@ -71,10 +71,10 @@ public class LogProdSQLiteAdapter implements SQLiteAdapterBase<LogProd> {
 		+ TABLE_NAME	+ " ("
 		+ COL_ID	+ " integer PRIMARY KEY AUTOINCREMENT,"
 		+ COL_MOMENT	+ " string ,"
-		+ COL_DATE	+ " datetime ,"
+		+ COL_DATE	+ " string ,"
 		+ COL_LGNE_PROD	+ " integer ,"
 		+ COL_USER + " integer ,"
-		+COL_STATOIN + " integer ,"
+		+COL_STATOIN + " integer "
 		+ ");";
 	}
 
