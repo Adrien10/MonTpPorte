@@ -63,14 +63,23 @@ private static final String TAG = "ProductionDBAdapter";
 		result.put(	COL_ID, String.valueOf(production.getId()) 
 					);				
 		result.put(	COL_ID_COMMANDE,
-					String.valueOf(production.getCommande() )
+					String.valueOf(production.getCommande().getId() )
 					);				
 		result.put(	COL_NORDRE,	
 					String.valueOf(production.getnOrdre()) 
 					);
+		if(production.getStationCourante() == null)
+		{
 		result.put(	COL_STATION_COURANTE,	
-				String.valueOf(production.getStationCourante()) 
-				);		
+				String.valueOf(0) 
+				);
+		}
+		else
+		{
+			result.put(	COL_STATION_COURANTE,	
+					String.valueOf(production.getStationCourante().getId()) 
+					);
+		}
 
 		return result;
 	}
@@ -88,9 +97,17 @@ private static final String TAG = "ProductionDBAdapter";
 					c.getColumnIndexOrThrow(COL_ID_COMMANDE)))); 
 			result.setnOrdre(
 					c.getInt(c.getColumnIndexOrThrow(COL_NORDRE)));
-			result.setStationCourante(
-					zoneAdapter.getByID(c.getInt(
-							c.getColumnIndexOrThrow(COL_STATION_COURANTE))));
+			if(zoneAdapter.getByID(c.getInt(
+					c.getColumnIndexOrThrow(COL_STATION_COURANTE))) == null)
+			{
+			result.setStationCourante(new Zone());
+			}
+			else
+			{
+				result.setStationCourante(
+						zoneAdapter.getByID(c.getInt(
+								c.getColumnIndexOrThrow(COL_STATION_COURANTE))));
+			}
 		}
 		
 		return result;
@@ -211,8 +228,16 @@ private static final String TAG = "ProductionDBAdapter";
             	production.setCommande(cdeAdapter.getByID(Integer.parseInt(
             			cursor.getString(1))));
             	production.setnOrdre(Integer.parseInt(cursor.getString(2)));
-            	production.setStationCourante(zoneAdapter.getByID((
-            			Integer.parseInt(cursor.getString(3)))));
+            	if(zoneAdapter.getByID(Integer.parseInt(cursor.getString(3))) 
+            			== null)
+    			{
+            		production.setStationCourante(new Zone());
+    			}
+            	else
+            	{
+            		production.setStationCourante(zoneAdapter.getByID((
+                			Integer.parseInt(cursor.getString(3)))));
+            	}
                 // Adding user to list
             	productions.add(production);
             } while (cursor.moveToNext());
@@ -243,8 +268,16 @@ private static final String TAG = "ProductionDBAdapter";
             	production.setCommande(cdeAdapter.getByID(Integer.parseInt(
             			cursor.getString(1))));
             	production.setnOrdre(Integer.parseInt(cursor.getString(2)));
-            	production.setStationCourante(zoneAdapter.getByID((
-            			Integer.parseInt(cursor.getString(3)))));
+            	if(zoneAdapter.getByID(Integer.parseInt(cursor.getString(3))) 
+            			== null)
+    			{
+	            	production.setStationCourante(new Zone());
+    			}
+            	else
+            	{
+            		production.setStationCourante(zoneAdapter.getByID((
+	            			Integer.parseInt(cursor.getString(3)))));
+            	}
                 // Adding user to list
             	productions.add(production);
             } while (cursor.moveToNext());

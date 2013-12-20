@@ -84,9 +84,18 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 		result.put(	COL_ETAT,	
 				String.valueOf(zone.getEtat()) 
 				);
+		if(zone.getStation_destination() == null)
+		{
 		result.put(	COL_STATOIN_DEST,	
-				String.valueOf(zone.getStation_destination().getId()) 
-				);	
+				String.valueOf(0) 
+				);
+		}
+		else
+		{
+			result.put(	COL_STATOIN_DEST,	
+					String.valueOf(zone.getStation_destination().getId()) 
+					);
+		}
 
 		return result;
 	}
@@ -119,11 +128,15 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 	public Zone getByID(int id) {
 		Cursor c = this.getSingleCursor(id);
 		if(c.getCount()!=0)
+		{
 			c.moveToFirst();
 		Zone result = this.cursorToItem(c);
 		c.close();
-		
 		return result;
+		}
+		else
+			return null;
+		
 	}
 
 	public long insert(Zone item) {
@@ -222,7 +235,15 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
             	zone.setNom(cursor.getString(1));
             	zone.setQuantite_tampon(Integer.parseInt(cursor.getString(2)));
             	zone.setEtat(Integer.parseInt(cursor.getString(3)));
-            	zone.setStation_destination(getByID(Integer.parseInt(cursor.getString(4))));
+            	if(getByID(Integer.parseInt(cursor.getString(4))) == null)
+        		{
+            		zone.setStation_destination(getByID(0));
+        		}
+        		else
+        		{
+        			zone.setStation_destination(getByID(Integer.parseInt(cursor.
+                			getString(4))));
+        		}
                 // Adding zone to list
             	zones.add(zone);
             } while (cursor.moveToNext());
