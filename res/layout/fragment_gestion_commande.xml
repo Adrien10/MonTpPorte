@@ -25,15 +25,6 @@
         android:text="@string/choicemat"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <Button
-        android:id="@+id/buttonAddCommand"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/numberPicker1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="@string/ok" />
-
     <RadioGroup
         android:id="@+id/radioprod"
         android:layout_width="wrap_content"
@@ -102,11 +93,26 @@
         android:text="@string/nbproduct"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <NumberPicker
-        android:id="@+id/numberPicker1"
+    <Button
+        android:id="@+id/buttonAddCommand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/buttonAddCommand" />
+        android:layout_below="@+id/radiomat"
+        android:layout_centerHorizontal="true"
+        android:text="@string/ok" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/radiomat"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_marginBottom="23dp"
+        android:layout_toLeftOf="@+id/buttonAddCommand"
+        android:ems="10"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>
