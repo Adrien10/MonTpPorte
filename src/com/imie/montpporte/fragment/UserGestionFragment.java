@@ -2,14 +2,10 @@ package com.imie.montpporte.fragment;
 
 import java.util.ArrayList;
 
-import com.imie.montpporte.GestionUserActivity;
-import com.imie.montpporte.MainActivity;
 import com.imie.montpporte.R;
 import com.imie.montpporte.bdd.MonTpPorteSQLiteOpenHelper;
 import com.imie.montpporte.data.UserSQLiteAdapter;
-import com.imie.montpporte.data.ZoneSQLiteAdapter;
 import com.imie.montpporte.model.User;
-import com.imie.montpporte.model.Zone;
 
 import android.app.Fragment;
 import android.database.sqlite.SQLiteDatabase;

@@ -5,7 +5,6 @@ import com.imie.montpporte.data.ProductionSQLiteAdapter;
 import com.imie.montpporte.data.UserSQLiteAdapter;
 import com.imie.montpporte.data.ZoneSQLiteAdapter;
 import com.imie.montpporte.model.Commande;
-import com.imie.montpporte.model.Production;
 import com.imie.montpporte.model.User;
 import com.imie.montpporte.model.Zone;
 

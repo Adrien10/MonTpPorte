@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import com.imie.montpporte.bdd.MonTpPorteSQLiteOpenHelper;
 import com.imie.montpporte.data.ProductionSQLiteAdapter;
-import com.imie.montpporte.data.ZoneSQLiteAdapter;
 import com.imie.montpporte.model.Production;
 
 import android.app.ActionBar;
