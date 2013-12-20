@@ -86,7 +86,7 @@ public class UserGestionFragment extends Fragment {
         btnAdd.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-		        UserSQLiteAdapter useradapter = new UserSQLiteAdapter(db);
+		       
 		        //Get back text in login edit text
 		        EditText login = (EditText) rootView.findViewById(
 						R.id.editTextAddLogin);
