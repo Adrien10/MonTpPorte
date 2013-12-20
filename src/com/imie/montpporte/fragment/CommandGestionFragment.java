@@ -73,7 +73,7 @@ public class CommandGestionFragment extends Fragment {
 					 
 					 if( productValue != null && materialValue != null)
 					 {
-						 	//insert a commande
+						 	//insert a commandes
 							Commande cmd = new Commande(numberValue,productValue,
 									materialValue,numberClt);
 							cmdsqladapter.insert(cmd);
