@@ -1,11 +1,13 @@
 package com.imie.montpporte;
 
+import com.imie.montpporte.model.LogProd;
 import com.imie.montpporte.model.User;
 import com.imie.montpporte.model.Zone;
 
 import java.util.ArrayList;
 
 import com.imie.montpporte.bdd.MonTpPorteSQLiteOpenHelper;
+import com.imie.montpporte.data.LogProdSQLiteAdapter;
 import com.imie.montpporte.data.ProductionSQLiteAdapter;
 import com.imie.montpporte.model.Production;
 
@@ -25,7 +27,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 public class StationActivity extends Activity  {
-	
+	final User user = (User) this.getIntent()
+    		.getSerializableExtra("user");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +41,8 @@ public class StationActivity extends Activity  {
      // Mise à jour du titre de l'activity
     	final Zone zone = (Zone) this.getIntent().getSerializableExtra("station");
     	this.setTitle("Station : "+ zone.toString());
-     // Connexion à la bdd
+     
+    	// Connexion à la bdd
     	MonTpPorteSQLiteOpenHelper helper = new 
 				MonTpPorteSQLiteOpenHelper(this, "dbPorte",
 						null, R.string.app_version);
@@ -47,7 +51,10 @@ public class StationActivity extends Activity  {
      // Initialisation du spinner des lignes de production
         final ProductionSQLiteAdapter productionesqladapter =
 				new ProductionSQLiteAdapter(db);
-
+        
+        final LogProdSQLiteAdapter logprodsqladapter =
+				new LogProdSQLiteAdapter(db);
+        
         final ArrayList<Production> productions = 
         		productionesqladapter.getAllFromZone(zone);
     	final Spinner spinnerProduction = (Spinner) this.findViewById(
@@ -69,8 +76,12 @@ public class StationActivity extends Activity  {
 				btnStart.setEnabled(false);
 				btnStop.setEnabled(true);
 				spinnerProduction.setEnabled(false);
-				// TODO Log de début de production
-				
+				// Log de début de production
+				Production ligneproduction = (Production) 
+			    		spinnerProduction.getSelectedItem();
+				LogProd log = new LogProd("Start",ligneproduction.getId(),
+						user.getId(),zone.getId());
+				logprodsqladapter.insert(log);
 			}
 		});
 	    btnStop.setOnClickListener(new OnClickListener() {
@@ -83,7 +94,7 @@ public class StationActivity extends Activity  {
 				btnStop.setEnabled(false);
 				spinnerProduction.setEnabled(true);
 				
-				// TODO Log de fin de production
+				// Log de fin de production
 				productions.remove(ligneproduction);
 				spinnerArrayAdapter.remove(ligneproduction);
 				
@@ -92,7 +103,10 @@ public class StationActivity extends Activity  {
 				productionesqladapter.update(ligneproduction);
 				
 				spinnerArrayAdapter.notifyDataSetChanged();
-				
+				// Log de fin de production
+				LogProd log = new LogProd("Stop",ligneproduction.getId(),
+						user.getId(),zone.getId());
+				logprodsqladapter.insert(log);
 			}
 		});
 	}
@@ -120,8 +134,7 @@ public class StationActivity extends Activity  {
     
     public void displayDialog(){
 
-    	User user = (User) this.getIntent()
-        		.getSerializableExtra("user");
+    	
     	
     	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
     	alertDialog.setTitle("Utilisateur connecté");

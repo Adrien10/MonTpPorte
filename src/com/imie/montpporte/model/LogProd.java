@@ -1,6 +1,9 @@
 package com.imie.montpporte.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 public class LogProd {
@@ -11,15 +14,20 @@ public class LogProd {
 	private int ligneproduction;
 	private int user;
 	private int zone;
-	
+	GregorianCalendar gc = new GregorianCalendar();
+	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 	public LogProd() {
 		// TODO Auto-generated constructor stub
 	}
-	public LogProd(int id, String moment, Date date, int ligneproduction,
+	public LogProd(String moment, int ligneproduction,
 			int user, int zone) {
-		this.id = id;
 		this.moment = moment;
-		this.date = date;
+		try {
+			this.date = df.parse(df.format(gc.getTime()));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
 		this.ligneproduction = ligneproduction;
 		this.user = user;
 		this.zone = zone;
