@@ -39,7 +39,6 @@
     <string name="addcommand">Ajouter une commande</string>
     <string name="title_activity_gestion_user">Gestion des données</string>
     <string name="action_search">Search</string>
-    <string name="hello_world">Hello world!</string>
     <string name="idclient">Saissiez votre numéro de client</string>
      
     <string name="title_activity_gestion_command">Gestion des commandes</string>
