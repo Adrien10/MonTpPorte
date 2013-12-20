@@ -18,7 +18,15 @@
          <item>Commande</item>
          <item>Station</item>
     </string-array>
-
+    
+    <string name="choicemat">Choisissez votre produit :</string>
+    <string name="porte">Porte</string>
+    <string name="fenetre">fenêtre</string>
+    <string name="nbproduct">Combien en commandez-vous ?</string>
+    <string name="material">Type de matériaux :</string>
+    <string name="acier">acier</string>
+    <string name="bois">bois</string>
+    <string name="pvc">PVC</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Close navigation drawer</string>

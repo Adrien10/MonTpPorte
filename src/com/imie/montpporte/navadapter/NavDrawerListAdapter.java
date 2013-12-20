@@ -18,7 +18,8 @@ public class NavDrawerListAdapter extends BaseAdapter {
 	private Context context;
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	
-	public NavDrawerListAdapter(Context context, ArrayList<NavDrawerItem> navDrawerItems){
+	public NavDrawerListAdapter(Context context, ArrayList<NavDrawerItem>
+		navDrawerItems){
 		this.context = context;
 		this.navDrawerItems = navDrawerItems;
 	}
@@ -27,7 +28,7 @@ public class NavDrawerListAdapter extends BaseAdapter {
 	public int getCount() {
 		return navDrawerItems.size();
 	}
-
+	
 	@Override
 	public Object getItem(int position) {		
 		return navDrawerItems.get(position);
@@ -37,7 +38,10 @@ public class NavDrawerListAdapter extends BaseAdapter {
 	public long getItemId(int position) {
 		return position;
 	}
-
+	
+	/**
+	 * function to return fragment
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {

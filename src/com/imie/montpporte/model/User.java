@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 public class User implements Serializable{
 
+	
 	/**
 	 * 
 	 */
@@ -25,7 +26,12 @@ public class User implements Serializable{
 		this.password 	= pswd;
 	}
 	
-
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.login;
+	}
+	
 	public int getId() {
 		return id;
 	}
