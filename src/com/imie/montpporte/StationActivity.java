@@ -42,7 +42,8 @@ public class StationActivity extends Activity  {
         actionBar.setDisplayHomeAsUpEnabled(true);
     	
      // Mise à jour du titre de l'activity
-    	final Zone zone = (Zone) this.getIntent().getSerializableExtra("station");
+    	final Zone zone = (Zone) this.getIntent().
+    			getSerializableExtra("station");
     	this.setTitle("Station : "+ zone.toString());
      
     	// Connexion à la bdd
