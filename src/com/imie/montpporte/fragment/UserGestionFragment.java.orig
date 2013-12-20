@@ -48,6 +48,11 @@ public class UserGestionFragment extends Fragment {
 				rootView.getContext(),android.R.layout.
 				simple_spinner_dropdown_item,users);
 			    s.setAdapter(spinnerArrayAdapter);
+<<<<<<< HEAD
+	    //listen button del user
+	    btnDel.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
 				//Create a dialog alert to accept deleting user
 				AlertDialog.Builder alert = new AlertDialog.Builder(rootView.
 						getContext());
@@ -58,6 +63,10 @@ public class UserGestionFragment extends Fragment {
 					//If OK
 				    public void onClick(DialogInterface dialog, int whichButton) 
 				    {
+				    	User user = (User) s.getSelectedItem();
+						useradapter.delete(user);
+						spinnerArrayAdapter.remove(user);
+						spinnerArrayAdapter.notifyDataSetChanged();
 						Toast toast = Toast.makeText(rootView.getContext(), 
 								"Utilisateur supprimé",  Toast.LENGTH_LONG);
 						toast.show();
@@ -72,6 +81,11 @@ public class UserGestionFragment extends Fragment {
 				});
 				alert.show();
 				
+			}
+	    });
+	    
+=======
+>>>>>>> 20d208e73ace1aa0cc4a8f2017016b2f96601801
         //listen button add user
         btnAdd.setOnClickListener(new OnClickListener() {
 			@Override
