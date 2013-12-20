@@ -45,5 +45,8 @@
     <string name="zone">Zone destination</string>
     <string name="title_activity_gestion_command">Gestion des commandes</string>
     <string name="title_activity_gestion_station">Gestion des stationsy</string>
-
+    <string name="idclient">Saissiez votre numÃ©ro de client</string>
+    <string name="namestation">Entrez le nom de votre station :</string>
+    <string name="numbertampon">Valeur du tampon</string>
+    <string name="zone">Zone destination</string>
 </resources>

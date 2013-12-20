@@ -51,6 +51,7 @@ public class MonTpPorteSQLiteOpenHelper extends SQLiteOpenHelper{
 		zonesqladapter.insert(zone2);
 		zonesqladapter.insert(zone3);
 		zonesqladapter.insert(zone4);
+		zonesqladapter.insert(zoneMagasin);
 	
 		
 		CommandeSQLiteAdapter cdesqladapter = new CommandeSQLiteAdapter(db);
