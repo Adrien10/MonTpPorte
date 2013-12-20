@@ -20,6 +20,10 @@ import android.util.Log;
 public class LogProdSQLiteAdapter implements SQLiteAdapterBase<LogProd> {
 /** Global Fields */
 	public SQLiteDatabase db;
+	ProductionSQLiteAdapter prodAdapter;
+	ZoneSQLiteAdapter zoneAdapter;
+	UserSQLiteAdapter userAdapter;
+	
 	private static final String TAG = "LogDBAdapter";
 	public static final String TABLE_NAME = "Log";
 	
@@ -88,13 +92,13 @@ public class LogProdSQLiteAdapter implements SQLiteAdapterBase<LogProd> {
 					String.valueOf(log.getDate()) 
 					);
 		result.put(	COL_LGNE_PROD,	
-				String.valueOf(log.getLigneproduction()) 
+				String.valueOf(log.getLigneproduction().getId()) 
 				);
 		result.put(	COL_USER,	
-				String.valueOf(log.getUser()) 
+				String.valueOf(log.getUser().getId()) 
 				);	
 		result.put(	COL_STATOIN,	
-				String.valueOf(log.getZone()) 
+				String.valueOf(log.getZone().getId()) 
 				);	
 		
 
@@ -103,14 +107,18 @@ public class LogProdSQLiteAdapter implements SQLiteAdapterBase<LogProd> {
 	
 	public LogProd cursorToItem(Cursor c) {
 		LogProd result = null;
-
+		prodAdapter = new ProductionSQLiteAdapter(db);
+		zoneAdapter = new ZoneSQLiteAdapter(db);
+		userAdapter = new UserSQLiteAdapter(db);
+		
 		if (c.getCount() != 0) {
 			result = new LogProd();			
 
-			result.setId(c.getInt( c.getColumnIndexOrThrow(COL_ID) ));
-			result.setMoment(c.getString( c.getColumnIndexOrThrow(COL_MOMENT) )); 
+			result.setId(c.getInt(c.getColumnIndexOrThrow(COL_ID) ));
+			result.setMoment(c.getString(c.getColumnIndexOrThrow(COL_MOMENT))); 
 			try {
-				result.setDate(df.parse(c.getString(c.getColumnIndexOrThrow(COL_DATE) )));
+				result.setDate(df.parse(c.getString(
+						c.getColumnIndexOrThrow(COL_DATE) )));
 			} catch (IllegalArgumentException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -118,12 +126,12 @@ public class LogProdSQLiteAdapter implements SQLiteAdapterBase<LogProd> {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			result.setZone(
-					c.getInt(c.getColumnIndexOrThrow(COL_STATOIN) ));
-			result.setUser(
-					c.getInt(c.getColumnIndexOrThrow(COL_USER) ));
-			result.setLigneproduction(
-					c.getInt(c.getColumnIndexOrThrow(COL_LGNE_PROD) ));
+			result.setZone(zoneAdapter.getByID(c.getInt(
+					c.getColumnIndexOrThrow(COL_STATOIN) )));
+			result.setUser(userAdapter.getByID(c.getInt(
+					c.getColumnIndexOrThrow(COL_USER) )));
+			result.setLigneproduction(prodAdapter.getByID(c.getInt(
+					c.getColumnIndexOrThrow(COL_LGNE_PROD) )));
 		}
 		
 		return result;
@@ -228,6 +236,9 @@ public class LogProdSQLiteAdapter implements SQLiteAdapterBase<LogProd> {
 	@Override
 	public ArrayList<LogProd> getAll() {
 		ArrayList<LogProd> logs = new ArrayList<LogProd>();
+		prodAdapter = new ProductionSQLiteAdapter(db);
+		zoneAdapter = new ZoneSQLiteAdapter(db);
+		userAdapter = new UserSQLiteAdapter(db);
 		
     	Cursor cursor = db.query(TABLE_NAME, 
         		 COLS, null,
@@ -245,9 +256,12 @@ public class LogProdSQLiteAdapter implements SQLiteAdapterBase<LogProd> {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-            	log.setLigneproduction(Integer.parseInt(cursor.getString(3)));
-            	log.setUser(Integer.parseInt(cursor.getString(4)));
-            	log.setZone(Integer.parseInt(cursor.getString(4)));
+            	log.setLigneproduction(prodAdapter.getByID(
+            			Integer.parseInt(cursor.getString(3))));
+            	log.setUser(userAdapter.getByID(
+            			Integer.parseInt(cursor.getString(4))));
+            	log.setZone(zoneAdapter.getByID(
+            			Integer.parseInt(cursor.getString(4))));
                 // Adding zone to list
             	logs.add(log);
             } while (cursor.moveToNext());

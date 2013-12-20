@@ -17,12 +17,12 @@ public class Zone implements Serializable{
 	protected String nom;
 	protected int quantite_tampon;
 	protected int etat;
-	protected int station_destination;
+	protected Zone station_destination;
 	
 	public Zone() {
 	}
 	
-	public Zone(String nom, int quantite_tampon,int stationdestination) {
+	public Zone(String nom, int quantite_tampon,Zone stationdestination) {
 		this.nom = nom;
 		this.quantite_tampon = quantite_tampon;
 		this.etat = 0;
@@ -67,11 +67,11 @@ public class Zone implements Serializable{
 		this.etat = etat;
 	}
 
-	public int getStation_destination() {
+	public Zone getStation_destination() {
 		return station_destination;
 	}
 
-	public void setStation_destination(int station_destination) {
+	public void setStation_destination(Zone station_destination) {
 		this.station_destination = station_destination;
 	}
 	

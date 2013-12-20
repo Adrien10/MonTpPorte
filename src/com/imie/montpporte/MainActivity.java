@@ -107,7 +107,7 @@ public class MainActivity extends Activity {
 	        	GestionDonnees();
 	            return true;
 	        case R.id.action_settings:
-	            // check for updates action
+	        	Search();
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
@@ -115,11 +115,20 @@ public class MainActivity extends Activity {
 	    }
 	 
 	    /**
-	     * Launching new activity
+	     * Launching new activity Gestion des données
 	     * */
 	    private void GestionDonnees() {
 	        Intent i = new Intent(MainActivity.this,
 	        		GestionUserActivity.class);
+	        startActivity(i);
+	    }
+	    
+	    /**
+	     * Launching new activity Search
+	     * */
+	    private void Search() {
+	        Intent i = new Intent(MainActivity.this,
+	        			SearchActivity.class);
 	        startActivity(i);
 	    }
 	    

@@ -15,6 +15,8 @@ public class ProductionSQLiteAdapter implements SQLiteAdapterBase<Production> {
 
 private static final String TAG = "ProductionDBAdapter";
 
+	CommandeSQLiteAdapter cdeAdapter;
+	ZoneSQLiteAdapter zoneAdapter;
 	public SQLiteDatabase db;
 	public static final String TABLE_NAME = "Production";
 	
@@ -75,17 +77,20 @@ private static final String TAG = "ProductionDBAdapter";
 	
 	public Production cursorToItem(Cursor c) {
 		Production result = null;
+		cdeAdapter = new CommandeSQLiteAdapter(db);
+		zoneAdapter = new ZoneSQLiteAdapter(db);
 
 		if (c.getCount() != 0) {
 			result = new Production();			
 
 			result.setId(c.getInt( c.getColumnIndexOrThrow(COL_ID) ));
-			result.setCommande( c.getInt(
-					c.getColumnIndexOrThrow(COL_ID_COMMANDE))); 
+			result.setCommande(cdeAdapter.getByID(c.getInt(
+					c.getColumnIndexOrThrow(COL_ID_COMMANDE)))); 
 			result.setnOrdre(
 					c.getInt(c.getColumnIndexOrThrow(COL_NORDRE)));
 			result.setStationCourante(
-					c.getInt(c.getColumnIndexOrThrow(COL_STATION_COURANTE)));
+					zoneAdapter.getByID(c.getInt(
+							c.getColumnIndexOrThrow(COL_STATION_COURANTE))));
 		}
 		
 		return result;
@@ -125,7 +130,8 @@ private static final String TAG = "ProductionDBAdapter";
 	public int update(Production item) {
 		Log.d(TAG, "Update DB(" + TABLE_NAME + ")");
 		
-		ContentValues values = ProductionSQLiteAdapter.productionToContentValues(item);	
+		ContentValues values = ProductionSQLiteAdapter.
+				productionToContentValues(item);	
 		String whereClause =  COL_ID + "=? ";
 		String[] whereArgs = new String[] {String.valueOf(item.getId()) };
 		
@@ -189,7 +195,8 @@ private static final String TAG = "ProductionDBAdapter";
 
 	@Override
 	public ArrayList<Production> getAll() {
-
+		cdeAdapter = new CommandeSQLiteAdapter(db);
+		zoneAdapter = new ZoneSQLiteAdapter(db);
 		ArrayList<Production> productions = new ArrayList<Production>();
 		
     	Cursor cursor = db.query(TABLE_NAME, 
@@ -201,9 +208,11 @@ private static final String TAG = "ProductionDBAdapter";
             do {
             	Production production = new Production();
             	production.setId(Integer.parseInt(cursor.getString(0)));
-            	production.setCommande(Integer.parseInt(cursor.getString(1)));
+            	production.setCommande(cdeAdapter.getByID(Integer.parseInt(
+            			cursor.getString(1))));
             	production.setnOrdre(Integer.parseInt(cursor.getString(2)));
-            	production.setStationCourante(Integer.parseInt(cursor.getString(3)));
+            	production.setStationCourante(zoneAdapter.getByID((
+            			Integer.parseInt(cursor.getString(3)))));
                 // Adding user to list
             	productions.add(production);
             } while (cursor.moveToNext());
@@ -215,7 +224,9 @@ private static final String TAG = "ProductionDBAdapter";
 	}
 	
 	public ArrayList<Production> getAllFromZone(Zone zone) {
-
+		cdeAdapter = new CommandeSQLiteAdapter(db);
+		zoneAdapter = new ZoneSQLiteAdapter(db);
+		
 		ArrayList<Production> productions = new ArrayList<Production>();
 		String whereClause =  COL_STATION_COURANTE + "=? ";
 		String[] whereArgs = new String[] {String.valueOf(zone.getId()) };
@@ -229,9 +240,11 @@ private static final String TAG = "ProductionDBAdapter";
             do {
             	Production production = new Production();
             	production.setId(Integer.parseInt(cursor.getString(0)));
-            	production.setCommande(Integer.parseInt(cursor.getString(1)));
+            	production.setCommande(cdeAdapter.getByID(Integer.parseInt(
+            			cursor.getString(1))));
             	production.setnOrdre(Integer.parseInt(cursor.getString(2)));
-            	production.setStationCourante(Integer.parseInt(cursor.getString(3)));
+            	production.setStationCourante(zoneAdapter.getByID((
+            			Integer.parseInt(cursor.getString(3)))));
                 // Adding user to list
             	productions.add(production);
             } while (cursor.moveToNext());

@@ -5,22 +5,23 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-
 public class LogProd {
 
 	private int id;
 	private String moment;
 	private Date date;
-	private int ligneproduction;
-	private int user;
-	private int zone;
+	private Production ligneproduction;
+	private User user;
+	private Zone zone;
+	
 	GregorianCalendar gc = new GregorianCalendar();
 	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	
 	public LogProd() {
 		// TODO Auto-generated constructor stub
 	}
-	public LogProd(String moment, int ligneproduction,
-			int user, int zone) {
+	public LogProd(String moment, Production ligneproduction,
+			User user, Zone zone) {
 		this.moment = moment;
 		try {
 			this.date = df.parse(df.format(gc.getTime()));
@@ -57,28 +58,43 @@ public class LogProd {
 		this.date = date;
 	}
 
-	public int getLigneproduction() {
+	public Production getLigneproduction() {
 		return ligneproduction;
 	}
 
-	public void setLigneproduction(int ligneproduction) {
+	public void setLigneproduction(Production ligneproduction) {
 		this.ligneproduction = ligneproduction;
 	}
 
-	public int getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(int user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 
-	public int getZone() {
+	public Zone getZone() {
 		return zone;
 	}
 
-	public void setZone(int zone) {
+	public void setZone(Zone zone) {
 		this.zone = zone;
+	}
+	@Override
+	public String toString() {
+	
+		String resultLog = "LOG_PRODUCTION : Commande n° " +
+		this.getLigneproduction().getCommande().getId() +
+		" ligne de production n° " + 
+		this.getLigneproduction().getnOrdre() +
+		"/" +
+		this.getLigneproduction().getCommande().getQuantite() +
+		" " +
+		this.getMoment() +
+		" à " +
+		this.getDate().toString();
+		return resultLog;
 	}
 
 }

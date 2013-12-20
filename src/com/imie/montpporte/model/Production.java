@@ -3,18 +3,18 @@ package com.imie.montpporte.model;
 public class Production {
 
 	private int id;
-	protected int commande;
+	protected Commande commande;
 	protected int nOrdre;
-	protected int stationCourante;
+	protected Zone stationCourante;
 	
 	public Production() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	public Production(Commande commande , int nordre) {
-		this.commande 	= commande.getId();
+		this.commande 	= commande;
 		this.nOrdre 	= nordre;
-		this.stationCourante = 1;
+		this.stationCourante = null;
 	}
 
 	public int getId() {
@@ -25,11 +25,11 @@ public class Production {
 		this.id = id;
 	}
 
-	public int getCommande() {
+	public Commande getCommande() {
 		return commande;
 	}
 
-	public void setCommande(int commande) {
+	public void setCommande(Commande commande) {
 		this.commande = commande;
 	}
 
@@ -41,17 +41,17 @@ public class Production {
 		this.nOrdre = nOrdre;
 	}
 
-	public int getStationCourante() {
+	public Zone getStationCourante() {
 		return stationCourante;
 	}
 
-	public void setStationCourante(int stationCourante) {
+	public void setStationCourante(Zone stationCourante) {
 		this.stationCourante = stationCourante;
 	}
 
 	@Override
 	public String toString() {
-		return  this.getCommande() + "|" + this.getnOrdre();
+		return  this.getCommande().getId() + "|" + this.getnOrdre();
 	}
 
 }

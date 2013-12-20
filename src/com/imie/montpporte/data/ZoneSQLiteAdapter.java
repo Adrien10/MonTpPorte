@@ -85,7 +85,7 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 				String.valueOf(zone.getEtat()) 
 				);
 		result.put(	COL_STATOIN_DEST,	
-				String.valueOf(zone.getStation_destination()) 
+				String.valueOf(zone.getStation_destination().getId()) 
 				);	
 
 		return result;
@@ -103,8 +103,8 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 					c.getInt(c.getColumnIndexOrThrow(COL_QUANTITE_TAMPON) ));
 			result.setQuantite_tampon(
 					c.getInt(c.getColumnIndexOrThrow(COL_ETAT) ));
-			result.setStation_destination(
-					c.getInt(c.getColumnIndexOrThrow(COL_STATOIN_DEST) ));
+			result.setStation_destination(getByID(
+					c.getInt(c.getColumnIndexOrThrow(COL_STATOIN_DEST) )));
 		}
 		
 		return result;
@@ -222,7 +222,7 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
             	zone.setNom(cursor.getString(1));
             	zone.setQuantite_tampon(Integer.parseInt(cursor.getString(2)));
             	zone.setEtat(Integer.parseInt(cursor.getString(3)));
-            	zone.setStation_destination(Integer.parseInt(cursor.getString(4)));
+            	zone.setStation_destination(getByID(Integer.parseInt(cursor.getString(4))));
                 // Adding zone to list
             	zones.add(zone);
             } while (cursor.moveToNext());

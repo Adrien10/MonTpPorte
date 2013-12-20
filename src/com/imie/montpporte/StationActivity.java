@@ -82,8 +82,8 @@ public class StationActivity extends Activity  {
 				// Log de début de production
 				Production ligneproduction = (Production) 
 			    		spinnerProduction.getSelectedItem();
-				LogProd log = new LogProd("Start",ligneproduction.getId(),
-						user.getId(),zone.getId());
+				LogProd log = new LogProd("Start",ligneproduction,
+						user,zone);
 				logprodsqladapter.insert(log);
 			}
 		});
@@ -107,8 +107,8 @@ public class StationActivity extends Activity  {
 				
 				spinnerArrayAdapter.notifyDataSetChanged();
 				// Log de fin de production
-				LogProd log = new LogProd("Stop",ligneproduction.getId(),
-						user.getId(),zone.getId());
+				LogProd log = new LogProd("Stop",ligneproduction,
+						user,zone);
 				logprodsqladapter.insert(log);
 			}
 		});
@@ -136,9 +136,6 @@ public class StationActivity extends Activity  {
     }
     
     public void displayDialog(){
-
-    	
-    	
     	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
     	alertDialog.setTitle("Utilisateur connecté");
     	alertDialog.setMessage(user.getLogin());
