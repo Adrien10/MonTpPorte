@@ -37,31 +37,20 @@ public class UserGestionFragment extends Fragment {
 						null, R.string.app_version);
 		
         final SQLiteDatabase db = helper.getDb();
-        Button btnAdd= (Button) rootView.findViewById(R.id.buttonAddUser);
-        Button btnDel= (Button) rootView.findViewById(R.id.buttonDel);
-        final UserSQLiteAdapter useradapter = new UserSQLiteAdapter(db);
+        Button btnAdd= (Button) rootView.findViewById(R.id.buttonAddUser); 
+        UserSQLiteAdapter useradapter = new UserSQLiteAdapter(db);
 		ArrayList<User>  users = useradapter.getAll();
 		
 		final Spinner s = (Spinner) rootView.findViewById(R.id.spinnerUser);
-		final ArrayAdapter<User> spinnerArrayAdapter = new ArrayAdapter<User>(
+		ArrayAdapter<User> spinnerArrayAdapter = new ArrayAdapter<User>(
 				rootView.getContext(),android.R.layout.
 				simple_spinner_dropdown_item,users);
 			    s.setAdapter(spinnerArrayAdapter);
-	    //listen button del user
-	    btnDel.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				User user = (User) s.getSelectedItem();
-				useradapter.delete(user);
-				spinnerArrayAdapter.notifyDataSetChanged();
-			}
-	    });
-	    
         //listen button add user
         btnAdd.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+		        UserSQLiteAdapter useradapter = new UserSQLiteAdapter(db);
 		        EditText login = (EditText) rootView.findViewById(
 						R.id.editTextAddLogin);
 		        EditText pwd = (EditText) rootView.findViewById(

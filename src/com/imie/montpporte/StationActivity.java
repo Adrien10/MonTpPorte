@@ -27,12 +27,15 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 public class StationActivity extends Activity  {
-	final User user = (User) this.getIntent()
-    		.getSerializableExtra("user");
+
+	User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_station);
+        
+        user = (User) this.getIntent()
+        		.getSerializableExtra("user");
         
      // Activation du retour par l'action bar
         ActionBar actionBar = getActionBar();
