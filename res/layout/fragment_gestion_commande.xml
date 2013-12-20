@@ -3,14 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="10dp" />
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -21,15 +13,6 @@
         android:gravity="center_horizontal"
         android:text="@string/addcommand"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <RadioButton
-        android:id="@+id/radioButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/radioButton1"
-        android:layout_alignBottom="@+id/radioButton1"
-        android:layout_toRightOf="@+id/imageView1"
-        android:text="@string/porte" />
 
     <TextView
         android:id="@+id/textView2"
@@ -42,34 +25,32 @@
         android:text="@string/choicemat"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <RadioButton
-        android:id="@+id/radioButton1"
+    <RadioGroup
+        android:id="@+id/radiomat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="19dp"
-        android:text="@string/fenetre" />
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_below="@+id/textView3"
+        android:layout_marginLeft="24dp" >
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_below="@+id/radioButton1"
-        android:layout_marginTop="26dp"
-        android:text="@string/nbproduct"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/acier" />
 
-    <NumberPicker
-        android:id="@+id/numberPicker1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_centerVertical="true" >
-    </NumberPicker>
+        <RadioButton
+            android:id="@+id/radioButton5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bois" />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pvc" />
+    </RadioGroup>
 
     <TextView
         android:id="@+id/textView4"
@@ -77,42 +58,61 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView3"
         android:layout_alignBottom="@+id/textView3"
-        android:layout_toRightOf="@+id/textView3"
+        android:layout_toRightOf="@+id/buttonAddCommand"
         android:text="@string/material"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <RadioButton
-        android:id="@+id/radioButton4"
+    <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/radioButton3"
-        android:layout_below="@+id/imageView1"
-        android:text="@string/pvc" />
-
-    <RadioButton
-        android:id="@+id/radioButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/imageView1"
-        android:layout_alignLeft="@+id/radioButton2"
-        android:text="@string/acier" />
-
-    <RadioButton
-        android:id="@+id/radioButton5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageView1"
-        android:layout_below="@+id/radioButton4"
-        android:layout_marginTop="15dp"
-        android:text="@string/bois" />
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_below="@+id/radioprod"
+        android:text="@string/nbproduct"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <Button
         android:id="@+id/buttonAddCommand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/radioButton5"
+        android:layout_below="@+id/radiomat"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="38dp"
         android:text="@string/ok" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/radiomat"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_marginBottom="23dp"
+        android:layout_toLeftOf="@+id/buttonAddCommand"
+        android:ems="10"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+    <RadioGroup
+        android:id="@+id/radioprod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fenetre" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/porte" />
+    </RadioGroup>
 
 </RelativeLayout>

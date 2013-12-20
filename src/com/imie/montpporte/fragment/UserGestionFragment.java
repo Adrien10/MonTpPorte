@@ -7,7 +7,9 @@ import com.imie.montpporte.bdd.MonTpPorteSQLiteOpenHelper;
 import com.imie.montpporte.data.UserSQLiteAdapter;
 import com.imie.montpporte.model.User;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -38,14 +40,48 @@ public class UserGestionFragment extends Fragment {
 		
         final SQLiteDatabase db = helper.getDb();
         Button btnAdd= (Button) rootView.findViewById(R.id.buttonAddUser); 
-        UserSQLiteAdapter useradapter = new UserSQLiteAdapter(db);
-		ArrayList<User>  users = useradapter.getAll();
-		
+        final UserSQLiteAdapter useradapter = new UserSQLiteAdapter(db);
+		final ArrayList<User>  users = useradapter.getAll();
 		final Spinner s = (Spinner) rootView.findViewById(R.id.spinnerUser);
-		ArrayAdapter<User> spinnerArrayAdapter = new ArrayAdapter<User>(
+		final ArrayAdapter<User> spinnerArrayAdapter = new ArrayAdapter<User>(
 				rootView.getContext(),android.R.layout.
 				simple_spinner_dropdown_item,users);
 			    s.setAdapter(spinnerArrayAdapter);
+		Button btnDel= (Button) rootView.findViewById(R.id.buttonDel);        
+        btnDel.setOnClickListener(new OnClickListener() {
+					
+				@Override
+				public void onClick(View v) {
+				//Create a dialog alert to accept deleting user
+				AlertDialog.Builder alert = new AlertDialog.Builder(rootView.
+						getContext());
+				alert.setTitle("Suppression Utilisateur");//Set title dialog
+				alert.setMessage("Etes vous sûr ?");	  //set message dialog
+				alert.setPositiveButton("Ok", new DialogInterface.
+				OnClickListener() {
+					//If OK
+				    public void onClick(DialogInterface dialog, int whichButton) 
+				    {
+				    	User user = (User) s.getSelectedItem();
+				    	users.remove(user);
+				    	useradapter.delete(user);
+				    	spinnerArrayAdapter.notifyDataSetChanged();
+						Toast toast = Toast.makeText(rootView.getContext(), 
+								"Utilisateur supprimé",  Toast.LENGTH_LONG);
+						toast.show();
+				    }
+				});
+				// if cancel
+				alert.setNegativeButton("Cancel", new DialogInterface.
+						OnClickListener() {
+				    public void onClick(DialogInterface dialog, int whichButton) 
+				    {
+				    //So sth here when "cancel" clicked.
+				    }
+				});
+				alert.show();
+			}
+        });
         //listen button add user
         btnAdd.setOnClickListener(new OnClickListener() {
 			@Override
