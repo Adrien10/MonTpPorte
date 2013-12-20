@@ -7,7 +7,9 @@ import com.imie.montpporte.bdd.MonTpPorteSQLiteOpenHelper;
 import com.imie.montpporte.data.UserSQLiteAdapter;
 import com.imie.montpporte.model.User;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -51,9 +53,34 @@ public class UserGestionFragment extends Fragment {
 	    btnDel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				User user = (User) s.getSelectedItem();
-				useradapter.delete(user);
-				spinnerArrayAdapter.notifyDataSetChanged();
+				//Create a dialog alert to accept deleting user
+				AlertDialog.Builder alert = new AlertDialog.Builder(rootView.
+						getContext());
+				alert.setTitle("Suppression Utilisateur");
+				alert.setMessage("Etes vous sûr ?");
+				alert.setPositiveButton("Ok", new DialogInterface.
+						OnClickListener() {
+					//If OK
+				    public void onClick(DialogInterface dialog, int whichButton) 
+				    {
+				    	User user = (User) s.getSelectedItem();
+						useradapter.delete(user);
+						spinnerArrayAdapter.remove(user);
+						spinnerArrayAdapter.notifyDataSetChanged();
+						Toast toast = Toast.makeText(rootView.getContext(), 
+								"Utilisateur supprimé",  Toast.LENGTH_LONG);
+						toast.show();
+				    }
+				});
+				alert.setNegativeButton("Cancel", new DialogInterface.
+						OnClickListener() {
+				    public void onClick(DialogInterface dialog, int whichButton) 
+				    {
+				    //So sth here when "cancel" clicked.
+				    }
+				});
+				alert.show();
+				
 			}
 	    });
 	    
