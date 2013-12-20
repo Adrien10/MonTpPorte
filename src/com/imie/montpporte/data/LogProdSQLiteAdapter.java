@@ -3,17 +3,14 @@ package com.imie.montpporte.data;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import com.imie.montpporte.bdd.SQLiteAdapterBase;
 import com.imie.montpporte.model.LogProd;
-import com.imie.montpporte.model.Zone;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.widget.SimpleAdapter;
 
 /**
  * Class LogProdSQLiteAdapter implements SQLiteAdapterBase <br/>
