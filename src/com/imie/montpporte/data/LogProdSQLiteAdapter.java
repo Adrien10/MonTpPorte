@@ -41,7 +41,6 @@ public class LogProdSQLiteAdapter implements SQLiteAdapterBase<LogProd> {
 	};
 	
 	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-	
 	/** Constructors */
 	public LogProdSQLiteAdapter(SQLiteDatabase db) {
 		 this.db = db;
