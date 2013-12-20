@@ -45,13 +45,12 @@ public class MonTpPorteSQLiteOpenHelper extends SQLiteOpenHelper{
 		Zone zone2 = new Zone("Façonnage",10,zone3);
 		Zone zone = new Zone("Découpage",10,zone2);
 		
-		
-		
+		zonesqladapter.insert(zoneMagasin);
 		zonesqladapter.insert(zone);
 		zonesqladapter.insert(zone2);
 		zonesqladapter.insert(zone3);
 		zonesqladapter.insert(zone4);
-		zonesqladapter.insert(zoneMagasin);
+		
 	
 		
 		CommandeSQLiteAdapter cdesqladapter = new CommandeSQLiteAdapter(db);
