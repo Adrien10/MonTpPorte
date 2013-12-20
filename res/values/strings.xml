@@ -45,4 +45,5 @@
     <string name="namestation">Entrez le nom de votre station :</string>
     <string name="numbertampon">Valeur du tampon</string>
     <string name="zone">Zone destination</string>
+    <string name="updateStation">Modifier station</string>
 </resources>
