@@ -1,5 +1,6 @@
 package com.imie.montpporte.data;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -112,8 +113,15 @@ public class LogProdSQLiteAdapter implements SQLiteAdapterBase<LogProd> {
 
 			result.setId(c.getInt( c.getColumnIndexOrThrow(COL_ID) ));
 			result.setMoment(c.getString( c.getColumnIndexOrThrow(COL_MOMENT) )); 
-			result.setDate(
-					c.getString(df.parse(c.getColumnIndexOrThrow(COL_DATE) )));
+			try {
+				result.setDate(df.parse(c.getString(c.getColumnIndexOrThrow(COL_DATE) )));
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			result.setZone(
 					c.getInt(c.getColumnIndexOrThrow(COL_STATOIN) ));
 			result.setUser(
@@ -235,7 +243,12 @@ public class LogProdSQLiteAdapter implements SQLiteAdapterBase<LogProd> {
             	LogProd log = new LogProd();
             	log.setId(Integer.parseInt(cursor.getString(0)));
             	log.setMoment(cursor.getString(1));
-            	log.setDate((Date)df.parse(cursor.getString(2)));
+            	try {
+					log.setDate(df.parse(cursor.getString(2)));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             	log.setLigneproduction(Integer.parseInt(cursor.getString(3)));
             	log.setUser(Integer.parseInt(cursor.getString(4)));
             	log.setZone(Integer.parseInt(cursor.getString(4)));
