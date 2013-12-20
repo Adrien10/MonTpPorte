@@ -92,16 +92,6 @@
         android:layout_marginBottom="60dp"
         android:text="@string/ok" />
 
-    <EditText
-        android:id="@+id/editTextNbProduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/radiomat"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_alignRight="@+id/textView3"
-        android:ems="10"
-        android:inputType="number" />
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -135,5 +125,16 @@
 
         <requestFocus />
     </EditText>
+
+    <EditText
+        android:id="@+id/editTextNbProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/radiomat"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/textView3"
+        android:layout_marginBottom="28dp"
+        android:ems="10"
+        android:inputType="number" />
 
 </RelativeLayout>

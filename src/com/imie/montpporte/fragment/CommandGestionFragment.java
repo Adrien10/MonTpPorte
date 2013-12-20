@@ -51,39 +51,52 @@ public class CommandGestionFragment extends Fragment {
 				 EditText numClt = (EditText) rootView.findViewById
 						 (R.id.editTextNumClt); 
 				//Returns integer represents the selected radio button's ID
+		
 				 int selectedMat = material.getCheckedRadioButtonId();
 				 int selectedProd = product.getCheckedRadioButtonId();
-				 int numberValue = Integer.parseInt(nbProduct.getText()
-						 .toString());
-				 int numberClt = Integer.parseInt(nbProduct.getText()
-						 .toString());
-				 // Gets a reference to our "selected" radio button
+				// Gets a reference to our "selected" radio button
 				 RadioButton mat = (RadioButton) rootView.findViewById
 						 (selectedMat);
 				 RadioButton prod = (RadioButton) rootView.findViewById
-						 (selectedProd); 
-				 //get the text  from the "selected" radio button
+						 (selectedProd);
+				 //if area is not null
+				 if (!nbProduct.getText().toString().isEmpty() && !numClt
+						 .getText().toString().isEmpty()) {
+					 int numberValue = Integer.parseInt(nbProduct.getText()
+							 .toString());
 				 
-				 String productValue = (String) prod.getText();
-				 String materialValue = (String) mat.getText();
-
-				 
-				 if( productValue != null && materialValue != null)
-				 {
-					 	//insert a commande
-						Commande cmd = new Commande(numberValue,productValue,
-								materialValue,numberClt);
-						cmdsqladapter.insert(cmd);
-						//Display a toast 
+					 int numberClt = Integer.parseInt(nbProduct.getText()
+							 .toString());
+					  
+					 //get the text  from the "selected" radio button
+					 
+					 String productValue = (String) prod.getText();
+					 String materialValue = (String) mat.getText();
+	
+					 
+					 if( productValue != null && materialValue != null)
+					 {
+						 	//insert a commande
+							Commande cmd = new Commande(numberValue,productValue,
+									materialValue,numberClt);
+							cmdsqladapter.insert(cmd);
+							//Display a toast 
+							Toast toast = Toast.makeText(rootView.getContext(), 
+									"Commande enregistrée",  Toast.LENGTH_LONG);
+							toast.show();
+							Fragment fragment = null;
+							fragment = new CommandGestionFragment();
+							
+					}else{
 						Toast toast = Toast.makeText(rootView.getContext(), 
-								"Commande enregistrée",  Toast.LENGTH_LONG);
+								"Donnée invalide",  Toast.LENGTH_LONG);
 						toast.show();
-				}else{
-					Toast toast = Toast.makeText(rootView.getContext(), 
-							"Donnée invalide",  Toast.LENGTH_LONG);
-					toast.show();
+					}
+				 }else{
+						Toast toast = Toast.makeText(rootView.getContext(), 
+								"Donnée invalide",  Toast.LENGTH_LONG);
+						toast.show();
 				}
-			
 			}
 	    });
         
