@@ -202,7 +202,7 @@ public class UserSQLiteAdapter implements SQLiteAdapterBase<User> {
 				COL_ID+" = ?",
 				new String[]{String.valueOf(id)});
 	}
-
+	
 	@Override
 	public int delete(User item) {
 		return this.db.delete(
@@ -239,7 +239,7 @@ public class UserSQLiteAdapter implements SQLiteAdapterBase<User> {
             } while (cursor.moveToNext());
         }
  
-        // return commande list
+        // return user list
         return users;
 			
 	}

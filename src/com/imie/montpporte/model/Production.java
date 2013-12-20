@@ -16,7 +16,11 @@ public class Production {
 		this.nOrdre 	= nordre;
 		this.stationCourante = null;
 	}
-
+	
+	/**
+	 * get id production
+	 * @return int
+	 */
 	public int getId() {
 		return id;
 	}

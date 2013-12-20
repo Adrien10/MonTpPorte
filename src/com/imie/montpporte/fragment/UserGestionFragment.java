@@ -104,11 +104,12 @@ public class UserGestionFragment extends Fragment {
 					User useradd = new User(nameValue, pwdValue);
 					//insert a user
 					useradapter.insert(useradd);
-					//Display a toast 
+					//Display a toast success
 					Toast toast = Toast.makeText(rootView.getContext(), 
 							"Utilisateur enregistré",  Toast.LENGTH_LONG);
 					toast.show();
 				}else{
+					//Display a toast warning
 					Toast toast = Toast.makeText(rootView.getContext(), 
 							"Donnée invalide",  Toast.LENGTH_LONG);
 					toast.show();
