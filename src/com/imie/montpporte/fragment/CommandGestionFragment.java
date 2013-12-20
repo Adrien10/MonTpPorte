@@ -3,14 +3,11 @@ package com.imie.montpporte.fragment;
 import com.imie.montpporte.R;
 import com.imie.montpporte.bdd.MonTpPorteSQLiteOpenHelper;
 import com.imie.montpporte.data.CommandeSQLiteAdapter;
-import com.imie.montpporte.data.ZoneSQLiteAdapter;
 import com.imie.montpporte.model.Commande;
-import com.imie.montpporte.model.User;
 
 import android.app.Fragment;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
