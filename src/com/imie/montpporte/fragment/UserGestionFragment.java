@@ -87,10 +87,13 @@ public class UserGestionFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 		        UserSQLiteAdapter useradapter = new UserSQLiteAdapter(db);
+		        //Get back text in login edit text
 		        EditText login = (EditText) rootView.findViewById(
 						R.id.editTextAddLogin);
+		        //get back password in login edit password
 		        EditText pwd = (EditText) rootView.findViewById(
 						R.id.editTextAddPassword);
+		        //put them in variable
 		        String nameValue = login.getText().toString();
 				String pwdValue = pwd.getText().toString();
 				User user = useradapter.getByLogin(nameValue);
@@ -99,7 +102,9 @@ public class UserGestionFragment extends Fragment {
 				if( nameValue != null && pwdValue != null && user == null)
 				{
 					User useradd = new User(nameValue, pwdValue);
+					//insert a user
 					useradapter.insert(useradd);
+					//Display a toast 
 					Toast toast = Toast.makeText(rootView.getContext(), 
 							"Utilisateur enregistré",  Toast.LENGTH_LONG);
 					toast.show();

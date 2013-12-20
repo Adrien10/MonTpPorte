@@ -35,6 +35,7 @@
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:imeOptions="actionDone"
         android:ems="10" />
 
     <TextView
@@ -54,6 +55,8 @@
         android:layout_below="@+id/textView2"
         android:layout_marginTop="17dp"
         android:ems="10"
+        android:imeOptions="actionDone"
+  
         android:inputType="textPassword" />
 
     <Spinner
