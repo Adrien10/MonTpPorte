@@ -82,4 +82,15 @@
         android:layout_toRightOf="@+id/editTextTampon"
         android:text="@string/ok" />
 
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/spinnerStationDestination"
+        android:text="@string/updateStation"
+        android:textAppearance="?android:attr/textAppearanceLarge" 
+        android:gravity="center_horizontal"/>
+
 </RelativeLayout>

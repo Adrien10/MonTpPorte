@@ -104,6 +104,9 @@ public class UserGestionFragment extends Fragment {
 					User useradd = new User(nameValue, pwdValue);
 					//insert a user
 					useradapter.insert(useradd);
+					//Refresh spinner
+					users.add(useradd);
+					spinnerArrayAdapter.notifyDataSetChanged();
 					//Display a toast success
 					Toast toast = Toast.makeText(rootView.getContext(), 
 							"Utilisateur enregistré",  Toast.LENGTH_LONG);
