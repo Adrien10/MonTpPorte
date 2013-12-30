@@ -137,7 +137,7 @@ private static final String TAG = "ProductionDBAdapter";
 	
 		if(values.size()!=0){
 			int newid = (int)this.db.insert(TABLE_NAME,null,values);
-			
+			item.setId(newid);
 			return newid;
 		}else{
 			return -1;
@@ -287,11 +287,4 @@ private static final String TAG = "ProductionDBAdapter";
         return productions;
 
 	}
-
-	/*@Override
-	public ArrayList<Production> cursorToItems(Cursor c) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
-
 }

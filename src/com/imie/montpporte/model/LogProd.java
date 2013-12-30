@@ -11,6 +11,7 @@ public class LogProd {
 	private String moment;
 	private Date date;
 	private Production ligneproduction;
+	private Commande commande;
 	private User user;
 	private Zone zone;
 	
@@ -32,6 +33,7 @@ public class LogProd {
 		this.ligneproduction = ligneproduction;
 		this.user = user;
 		this.zone = zone;
+		this.commande = ligneproduction.getCommande();
 	}
 
 	public int getId() {
@@ -81,6 +83,15 @@ public class LogProd {
 	public void setZone(Zone zone) {
 		this.zone = zone;
 	}
+	
+	
+	
+	public Commande getCommande() {
+		return commande;
+	}
+	public void setCommande(Commande commande) {
+		this.commande = commande;
+	}
 	@Override
 	public String toString() {
 	
@@ -92,8 +103,8 @@ public class LogProd {
 		this.getLigneproduction().getCommande().getQuantite() +
 		" " +
 		this.getMoment() +
-		" à " +
-		this.getDate().toString();
+		" à heure" ;//+
+		//this.getDate().toString();
 		return resultLog;
 	}
 

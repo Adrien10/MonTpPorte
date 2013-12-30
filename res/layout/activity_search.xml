@@ -3,26 +3,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <Spinner
+        android:id="@+id/spinnerCdeSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/editTextResume"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:layout_below="@+id/btnSearch"
         android:ems="10"
-        android:inputType="textMultiLine" >
-
-        <requestFocus />
-    </EditText>
+        android:inputType="textMultiLine"
+        android:singleLine="false" />
 
     <Button
-        android:id="@+id/btnRechercher"
+        android:id="@+id/btnSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="56dp"
-        android:text="Rechercher" />
+        android:layout_below="@+id/spinnerCdeSearch"
+        android:layout_centerHorizontal="true"
+        android:text="Résumé" />
 
 </RelativeLayout>

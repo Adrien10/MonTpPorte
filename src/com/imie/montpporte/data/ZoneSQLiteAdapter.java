@@ -86,15 +86,12 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
 				);
 		if(zone.getStation_destination() == null)
 		{
-		result.put(	COL_STATOIN_DEST,	
-				String.valueOf(0) 
-				);
+		result.put(	COL_STATOIN_DEST,String.valueOf(0));
 		}
 		else
 		{
 			result.put(	COL_STATOIN_DEST,	
-					String.valueOf(zone.getStation_destination().getId()) 
-					);
+					String.valueOf(zone.getStation_destination().getId()));
 		}
 
 		return result;
@@ -252,11 +249,17 @@ public class ZoneSQLiteAdapter implements SQLiteAdapterBase<Zone> {
         // return zones list
         return zones;
 	}
+	
+	// First start station
+	public Zone getFirstZone() {
 
-	/*@Override
-	public ArrayList<Zone> cursorToItems(Cursor c) {
-		// TODO Auto-generated method stub
-		return null;
+		String whereClause =  COL_STATOIN_DEST + " NOT IN ( SELECT id FROM Zone)";
+		
+		Cursor cursor = db.query(TABLE_NAME, 
+       		 COLS, whereClause,
+       		null, null, null, null, null);
+ 
+        // return zones list
+        return cursorToItem(cursor);
 	}
-*/
 }

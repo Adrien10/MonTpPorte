@@ -14,7 +14,12 @@ public class Production {
 	public Production(Commande commande , int nordre) {
 		this.commande 	= commande;
 		this.nOrdre 	= nordre;
-		this.stationCourante = null;
+		
+	}
+	public Production(Commande commande , int nordre, Zone zone) {
+		this.commande 	= commande;
+		this.nOrdre 	= nordre;
+		this.stationCourante = zone;
 	}
 	
 	/**

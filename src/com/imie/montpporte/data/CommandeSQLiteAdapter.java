@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.imie.montpporte.bdd.SQLiteAdapterBase;
 import com.imie.montpporte.model.Commande;
 import com.imie.montpporte.model.Production;
+import com.imie.montpporte.model.Zone;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -134,20 +135,24 @@ private static final String TAG = "CommandeDBAdapter";
 	public long insert(Commande item) {
 		Log.d(TAG, "Insert DB(" + TABLE_NAME + ")");
 		
-		ProductionSQLiteAdapter productionesqladapter =
+		ProductionSQLiteAdapter productionsqladapter =
 					new ProductionSQLiteAdapter(db);
 		
+		ZoneSQLiteAdapter zonesqladapter = new ZoneSQLiteAdapter(db);
+		//Zone zone = zonesqladapter.getFirstZone();
+		Zone zone = zonesqladapter.getByID(5);
 		ContentValues values = CommandeSQLiteAdapter.commandeToContentValues(
 				item);
 		values.remove(COL_ID);
 	
-		if(values.size()!=0){
+		if(values.size()!=0)
+		{
 			int newid = (int)this.db.insert(TABLE_NAME,null,values);
 			item.setId(newid);
 			int i = 1;
 			while ( i <= item.getQuantite()){
-				Production production = new Production(item, i);
-				productionesqladapter.insert(production);
+				Production production = new Production(item, i, zone);
+				productionsqladapter.insert(production);
 				i++;
 			}
 			return newid;
@@ -243,8 +248,8 @@ private static final String TAG = "CommandeDBAdapter";
             	commande.setId(Integer.parseInt(cursor.getString(0)));
             	commande.setQuantite(Integer.parseInt(cursor.getString(1)));
             	commande.setTypeItem(cursor.getString(2));
-            	commande.setMateriaux(cursor.getString(2));
-            	commande.setIdClient(Integer.parseInt(cursor.getString(2)));
+            	commande.setMateriaux(cursor.getString(3));
+            	commande.setIdClient(Integer.parseInt(cursor.getString(4)));
                 // Adding user to list
                 commandes.add(commande);
             } while (cursor.moveToNext());
